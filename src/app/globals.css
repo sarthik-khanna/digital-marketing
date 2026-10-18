@@ -1,26 +1,129 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-heading: var(--font-display);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Aceternity infinite-moving-cards */
+  --animate-scroll: scroll var(--animation-duration, 40s)
+    var(--animation-direction, forwards) linear infinite;
+
+  @keyframes scroll {
+    to {
+      transform: translate(calc(-50% - 0.5rem));
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/*
+ * Brand tokens. One dark theme (the <html> element carries the `dark` class).
+ * Accent is a single warm orange; everything else is a warm neutral.
+ */
+:root {
+  --background: oklch(0.14 0.006 60);
+  --foreground: oklch(0.97 0.008 80);
+  --card: oklch(0.18 0.007 60);
+  --card-foreground: oklch(0.97 0.008 80);
+  --popover: oklch(0.18 0.007 60);
+  --popover-foreground: oklch(0.97 0.008 80);
+  --primary: oklch(0.72 0.19 48);
+  --primary-foreground: oklch(0.15 0.01 50);
+  --secondary: oklch(0.22 0.007 60);
+  --secondary-foreground: oklch(0.97 0.008 80);
+  --muted: oklch(0.22 0.007 60);
+  --muted-foreground: oklch(0.72 0.012 70);
+  --accent: oklch(0.25 0.012 55);
+  --accent-foreground: oklch(0.97 0.008 80);
+  --destructive: oklch(0.66 0.21 25);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.72 0.19 48);
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-heading tracking-tight;
+  }
+}
+
+/*
+ * Vengeance UI `logo-slider`: the registry ships the component without its
+ * stylesheet, so this implements the class contract the component renders
+ * (--speed, --blurs, --blur, --blur-index, data-direction, data-pause-on-hover).
+ * Usage passes the logo list twice so a -50% translate loops seamlessly.
+ */
+.logo-slider__track {
+  width: max-content;
+  animation: logo-slider-scroll calc(var(--speed, 60) * 1s) linear infinite;
+}
+.logo-slider__container[data-direction="right"] .logo-slider__track {
+  animation-direction: reverse;
+}
+.logo-slider__container[data-pause-on-hover="true"]:hover .logo-slider__track {
+  animation-play-state: paused;
+}
+.logo-slider__blur > div {
+  backdrop-filter: blur(
+    calc(var(--blur, 1) * (var(--blur-index) + 1) * 0.6px)
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent calc(var(--blur-index) / var(--blurs) * 100%),
+    black calc((var(--blur-index) + 1) / var(--blurs) * 100%)
+  );
+}
+@keyframes logo-slider-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-slider__track,
+  .animate-scroll {
+    animation: none;
+  }
 }
