@@ -10,6 +10,7 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-heading: var(--font-display);
+  --font-accent: var(--font-serif);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -26,6 +27,14 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-lime: var(--lime);
+  --color-lime-foreground: var(--lime-foreground);
+  --color-tint-rose: var(--tint-rose);
+  --color-tint-violet: var(--tint-violet);
+  --color-tint-amber: var(--tint-amber);
+  --color-tint-mint: var(--tint-mint);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -33,6 +42,9 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* One step past Tailwind's 7xl (80rem), for extra-wide panels. */
+  --container-8xl: 88rem;
 
   /* Aceternity infinite-moving-cards */
   --animate-scroll: scroll var(--animation-duration, 40s)
@@ -43,31 +55,51 @@
       transform: translate(calc(-50% - 0.5rem));
     }
   }
+
+  /* Hero cards bob gently; the circular badge turns slowly. */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-spin-slow: spin 18s linear infinite;
+
+  @keyframes float {
+    50% {
+      transform: translateY(-10px);
+    }
+  }
 }
 
 /*
- * Brand tokens. One dark theme (the <html> element carries the `dark` class).
- * Accent is a single warm orange; everything else is a warm neutral.
+ * Brand tokens. One light theme: a cool lavender-white canvas, deep ink text,
+ * a violet primary and a lime highlight used sparingly (badges, markers).
+ * `ink` is the dark surface for the footer, CTA and case-study panels.
  */
 :root {
-  --background: oklch(0.14 0.006 60);
-  --foreground: oklch(0.97 0.008 80);
-  --card: oklch(0.18 0.007 60);
-  --card-foreground: oklch(0.97 0.008 80);
-  --popover: oklch(0.18 0.007 60);
-  --popover-foreground: oklch(0.97 0.008 80);
-  --primary: oklch(0.72 0.19 48);
-  --primary-foreground: oklch(0.15 0.01 50);
-  --secondary: oklch(0.22 0.007 60);
-  --secondary-foreground: oklch(0.97 0.008 80);
-  --muted: oklch(0.22 0.007 60);
-  --muted-foreground: oklch(0.72 0.012 70);
-  --accent: oklch(0.25 0.012 55);
-  --accent-foreground: oklch(0.97 0.008 80);
-  --destructive: oklch(0.66 0.21 25);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.72 0.19 48);
+  --background: oklch(0.975 0.007 285);
+  --foreground: oklch(0.21 0.035 275);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.21 0.035 275);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.21 0.035 275);
+  --primary: oklch(0.52 0.24 277);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.945 0.022 285);
+  --secondary-foreground: oklch(0.21 0.035 275);
+  --muted: oklch(0.95 0.012 285);
+  --muted-foreground: oklch(0.47 0.03 275);
+  --accent: oklch(0.935 0.03 285);
+  --accent-foreground: oklch(0.21 0.035 275);
+  --destructive: oklch(0.58 0.22 25);
+  --border: oklch(0.21 0.035 275 / 9%);
+  --input: oklch(0.21 0.035 275 / 16%);
+  --ring: oklch(0.52 0.24 277);
+  --ink: oklch(0.19 0.04 277);
+  --ink-foreground: oklch(0.97 0.01 285);
+  --lime: oklch(0.9 0.19 124);
+  --lime-foreground: oklch(0.21 0.035 275);
+  /* Pastel card tints (service cards, mission/vision cards, page glows). */
+  --tint-rose: oklch(0.9 0.06 350);
+  --tint-violet: oklch(0.87 0.07 285);
+  --tint-amber: oklch(0.93 0.07 90);
+  --tint-mint: oklch(0.92 0.07 160);
   --radius: 0.75rem;
 }
 
@@ -77,7 +109,7 @@
   }
   html {
     @apply font-sans;
-    color-scheme: dark;
+    color-scheme: light;
   }
   body {
     @apply bg-background text-foreground antialiased;
@@ -87,6 +119,15 @@
   h3 {
     @apply font-heading tracking-tight;
   }
+}
+
+/* Faint square grid that fades out towards the edges. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-color, var(--border)) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color, var(--border)) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent);
 }
 
 /*
@@ -123,7 +164,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .logo-slider__track,
-  .animate-scroll {
+  .animate-scroll,
+  .animate-float,
+  .animate-spin-slow {
     animation: none;
   }
 }

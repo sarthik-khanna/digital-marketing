@@ -16,7 +16,7 @@ const initialState: InquiryState = {
 };
 
 const selectClass =
-  "h-11 w-full rounded-lg border border-input bg-input/30 px-2.5 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50";
+  "h-11 w-full rounded-xl border border-input bg-card px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50";
 
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
@@ -45,7 +45,7 @@ export function ContactForm() {
             defaultValue={state.values.name}
             aria-invalid={!!state.errors.name}
             aria-describedby={state.errors.name ? "name-error" : undefined}
-            className="h-11"
+            className="h-11 rounded-xl px-3"
           />
           <FieldError id="name-error" message={state.errors.name} />
         </div>
@@ -62,7 +62,7 @@ export function ContactForm() {
             defaultValue={state.values.email}
             aria-invalid={!!state.errors.email}
             aria-describedby={state.errors.email ? "email-error" : undefined}
-            className="h-11"
+            className="h-11 rounded-xl px-3"
           />
           <FieldError id="email-error" message={state.errors.email} />
         </div>
@@ -78,7 +78,7 @@ export function ContactForm() {
             name="company"
             autoComplete="organization"
             defaultValue={state.values.company}
-            className="h-11"
+            className="h-11 rounded-xl px-3"
           />
         </div>
         <div>
@@ -145,7 +145,7 @@ export function ContactForm() {
       </div>
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-        <Button type="submit" disabled={pending} className="h-11 rounded-full px-7 text-base">
+        <Button type="submit" disabled={pending} className="h-12 rounded-full px-8 text-sm font-semibold">
           {pending ? "Sending…" : "Send message"}
         </Button>
         <p

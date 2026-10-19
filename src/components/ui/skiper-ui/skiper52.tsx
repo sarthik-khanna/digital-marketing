@@ -2,6 +2,7 @@
 
 import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
+import Image from "next/image";
 import React, { useState } from "react";
 
 import { cn } from "@/lib/utils";
@@ -10,7 +11,7 @@ import { cn } from "@/lib/utils";
  * Skiper 52 (HoverExpand_001): the horizontal expand-on-hover strip.
  *
  * Adapted for this project: panels take their own content (tag, title,
- * metric) and a background class instead of demo photos, are focusable for
+ * metric), a background class and an optional photo, are focusable for
  * keyboard users, and size from the container so they fit narrower screens.
  */
 export type HoverExpandItem = {
@@ -20,6 +21,8 @@ export type HoverExpandItem = {
   metricLabel: string;
   /** Tailwind classes for the panel background (gradient, pattern, image). */
   className?: string;
+  /** Optional photo, drawn over the background and under the text. */
+  image?: string;
 };
 
 const HoverExpand_001 = ({
@@ -50,7 +53,7 @@ const HoverExpand_001 = ({
               aria-expanded={isActive}
               aria-label={`${item.title}: ${item.metric} ${item.metricLabel}`}
               className={cn(
-                "relative h-[26rem] cursor-pointer overflow-hidden rounded-3xl border border-border outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                "relative h-[26rem] cursor-pointer overflow-hidden rounded-3xl text-ink-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 item.className,
               )}
               initial={false}
@@ -67,10 +70,22 @@ const HoverExpand_001 = ({
                 }
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent" />
+              {item.image && (
+                <Image
+                  src={item.image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 768px) 48rem, 100vw"
+                  className={cn(
+                    "object-cover transition duration-500",
+                    isActive ? "scale-100" : "scale-110 grayscale-[40%]",
+                  )}
+                />
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-ink/10" />
               <span
                 aria-hidden="true"
-                className="absolute top-5 left-1/2 -translate-x-1/2 text-xs font-medium tracking-widest text-foreground/60 uppercase [writing-mode:vertical-rl]"
+                className="absolute top-5 left-1/2 -translate-x-1/2 text-xs font-medium tracking-widest text-ink-foreground/60 uppercase [writing-mode:vertical-rl]"
               >
                 {!isActive && item.tag}
               </span>
@@ -82,16 +97,16 @@ const HoverExpand_001 = ({
                     exit={{ opacity: 0 }}
                     className="absolute inset-0 flex flex-col justify-end p-6"
                   >
-                    <p className="text-xs font-medium tracking-widest text-primary uppercase">
+                    <p className="text-xs font-medium tracking-widest text-lime uppercase">
                       {item.tag}
                     </p>
-                    <h3 className="mt-2 font-heading text-2xl font-semibold text-foreground">
+                    <h3 className="mt-2 font-heading text-2xl font-semibold">
                       {item.title}
                     </h3>
-                    <p className="mt-4 font-heading text-5xl font-bold text-foreground">
+                    <p className="mt-4 font-heading text-6xl">
                       {item.metric}
                     </p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-ink-foreground/70">
                       {item.metricLabel}
                     </p>
                   </m.div>
