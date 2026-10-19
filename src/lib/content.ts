@@ -40,14 +40,37 @@ export type Service = {
   faq: Faq[];
 };
 
+/*
+ * Headlines may wrap one phrase in *asterisks*: it is set in the serif-italic
+ * accent (see <Accented> in section-heading.tsx).
+ */
+
 export const hero = {
   eyebrow: "Full-service digital marketing agency",
-  headlineStart: "Digital marketing that makes your brand",
-  flipWords: ["easy to find", "hard to ignore", "worth choosing", "profitable"],
+  headline: "Marketing that turns *attention* into revenue",
   subheading:
     "SEO, PPC, performance marketing and Meta ads, planned, launched and optimised against the one number that matters: revenue.",
   primaryCta: { label: "Book a free strategy call", href: "/contact" },
-  secondaryCta: { label: "Explore our services", href: "#services" },
+  secondaryCta: { label: "See our results", href: "#work" },
+  tags: ["SEO", "Google Ads", "Meta Ads", "Performance", "Analytics", "CRO"],
+  proof: { rating: "4.9/5", label: "from 120+ growing brands" },
+};
+
+export const intro = {
+  eyebrow: "Why Growthline",
+  title: "Senior marketers who treat your budget like *their own*",
+  paragraphs: [
+    "We are more than a supplier of clicks. Strategists, media buyers, writers and analysts work as one team on your account, and every plan starts with your margins, not our media wish list.",
+    "Fewer clients, senior people on every account and reporting that ends in revenue. That is the whole model.",
+  ],
+  points: [
+    "Named senior lead",
+    "Live revenue dashboard",
+    "Weekly test log",
+    "Month-to-month terms",
+  ],
+  badge: "Results not reports",
+  cta: { label: "Meet the team", href: "/about" },
 };
 
 export const clients = [
@@ -60,6 +83,31 @@ export const clients = [
   "Nimbus",
   "Harbor Lane",
 ];
+
+export const approach = {
+  eyebrow: "Our approach",
+  title: "Tailored plans, proven results and *straight answers*",
+  description:
+    "Every engagement starts with how your business makes money, then works backwards to the channels, messages and budgets that can move it.",
+  feature: {
+    eyebrow: "Our value",
+    title: "A growth plan built around your margins, not our media wish list",
+    body: "We model what a customer is worth before we spend a cent, then report every month on the numbers your finance team already trusts.",
+    cta: { label: "How we work", href: "/about" },
+  },
+  cards: [
+    {
+      eyebrow: "Our mission",
+      title: "Make every marketing dollar traceable to revenue",
+      body: "Clear tracking, honest reporting and a weekly test log, so you always know what is working and why.",
+    },
+    {
+      eyebrow: "Our promise",
+      title: "Senior people on your account, every single week",
+      body: "The strategist you meet in the pitch runs your account. No hand-offs to juniors after the contract is signed.",
+    },
+  ],
+};
 
 export const services: Service[] = [
   {
@@ -74,7 +122,7 @@ export const services: Service[] = [
     metaDescription:
       "Technical SEO, content and link building tied to revenue. See how Growthline grows organic traffic that turns into leads and sales.",
     eyebrow: "Search engine optimisation",
-    headline: "SEO that brings in customers, not just traffic",
+    headline: "SEO that brings in *customers*, not just traffic",
     subheading:
       "Technical fixes, search-led content and authority building, focused on the pages that earn revenue, with reporting you can take to your finance team.",
     stats: [
@@ -115,7 +163,7 @@ export const services: Service[] = [
     metaDescription:
       "Google Ads and PPC management built around cost per customer. Search, shopping and remarketing campaigns with revenue-level reporting.",
     eyebrow: "Pay-per-click advertising",
-    headline: "PPC that pays back, tracked to the last sale",
+    headline: "PPC that *pays back*, tracked to the last sale",
     subheading:
       "Search, shopping and remarketing campaigns structured around cost per customer, with tracking that follows the click all the way to revenue.",
     stats: [
@@ -156,7 +204,7 @@ export const services: Service[] = [
     metaDescription:
       "Full-funnel performance marketing across search, social and email, planned around CAC, ROAS and payback, with incrementality testing.",
     eyebrow: "Performance marketing",
-    headline: "Performance marketing built around your unit economics",
+    headline: "Performance marketing built around your *unit economics*",
     subheading:
       "One plan across paid, owned and lifecycle channels, judged on acquisition cost, return and payback rather than clicks and impressions.",
     stats: [
@@ -197,7 +245,7 @@ export const services: Service[] = [
     metaDescription:
       "Facebook and Instagram advertising with creative testing, Conversions API tracking and retargeting built to lower cost per customer.",
     eyebrow: "Facebook and Instagram advertising",
-    headline: "Meta ads that stop the scroll and fill the funnel",
+    headline: "Meta ads that *stop the scroll* and fill the funnel",
     subheading:
       "Creative-led campaigns on Facebook and Instagram, backed by server-side tracking and a testing rhythm that keeps cost per customer falling.",
     stats: [
@@ -236,7 +284,8 @@ export const stats: Stat[] = [
 ];
 
 export const howWeWork = {
-  title: "How we work",
+  eyebrow: "Our process",
+  title: "A simple loop that *compounds*",
   description:
     "A simple loop we repeat every month: learn, plan, ship, measure, then scale what works.",
   steps: [
@@ -269,50 +318,50 @@ export const howWeWork = {
 };
 
 export const work = {
-  title: "Results we can point to",
+  title: "Results we can *point to*",
   description:
-    "A selection of recent client work. Hover or tab through a panel to see the headline number.",
+    "A few recent client wins. Hover or tab through a panel to see the headline number.",
   items: [
     {
       tag: "Ecommerce",
       title: "Lumora Skincare",
       metric: "+212%",
       metricLabel: "online revenue in 6 months",
-      className: "bg-[radial-gradient(120%_90%_at_20%_10%,oklch(0.72_0.19_48/0.55),transparent),linear-gradient(160deg,oklch(0.26_0.02_50),oklch(0.16_0.01_60))]",
+      className: "bg-[radial-gradient(110%_90%_at_20%_10%,oklch(0.55_0.24_277/0.75),transparent),linear-gradient(160deg,oklch(0.27_0.07_280),oklch(0.17_0.04_277))]",
     },
     {
       tag: "B2B SaaS",
       title: "Brightwell Software",
       metric: "3.1x",
       metricLabel: "qualified pipeline",
-      className: "bg-[radial-gradient(110%_90%_at_80%_0%,oklch(0.68_0.14_75/0.5),transparent),linear-gradient(160deg,oklch(0.24_0.015_70),oklch(0.16_0.01_60))]",
+      className: "bg-[radial-gradient(110%_90%_at_80%_0%,oklch(0.9_0.19_124/0.35),transparent),linear-gradient(160deg,oklch(0.27_0.07_280),oklch(0.17_0.04_277))]",
     },
     {
       tag: "Local services",
       title: "Oakline Dental",
       metric: "-41%",
       metricLabel: "cost per booked appointment",
-      className: "bg-[radial-gradient(110%_90%_at_10%_100%,oklch(0.66_0.17_30/0.5),transparent),linear-gradient(160deg,oklch(0.25_0.015_40),oklch(0.16_0.01_60))]",
+      className: "bg-[radial-gradient(110%_90%_at_10%_100%,oklch(0.55_0.24_277/0.75),transparent),linear-gradient(160deg,oklch(0.27_0.07_280),oklch(0.17_0.04_277))]",
     },
     {
       tag: "Hospitality",
       title: "Harbor Lane Hotels",
       metric: "+58%",
       metricLabel: "direct bookings",
-      className: "bg-[radial-gradient(110%_90%_at_90%_100%,oklch(0.7_0.15_60/0.5),transparent),linear-gradient(160deg,oklch(0.25_0.015_60),oklch(0.16_0.01_60))]",
+      className: "bg-[radial-gradient(110%_90%_at_90%_100%,oklch(0.9_0.19_124/0.35),transparent),linear-gradient(160deg,oklch(0.27_0.07_280),oklch(0.17_0.04_277))]",
     },
     {
       tag: "Education",
       title: "Pinecrest Academy",
       metric: "9.4k",
       metricLabel: "enquiries in one intake",
-      className: "bg-[radial-gradient(110%_90%_at_50%_0%,oklch(0.74_0.12_85/0.5),transparent),linear-gradient(160deg,oklch(0.24_0.012_80),oklch(0.16_0.01_60))]",
+      className: "bg-[radial-gradient(110%_90%_at_50%_0%,oklch(0.55_0.24_277/0.75),transparent),linear-gradient(160deg,oklch(0.27_0.07_280),oklch(0.17_0.04_277))]",
     },
   ],
 };
 
 export const testimonials = {
-  title: "What clients say",
+  title: "What our clients *say*",
   items: [
     {
       quote:
@@ -348,7 +397,7 @@ export const testimonials = {
 };
 
 export const ctaBand = {
-  title: "Ready to grow?",
+  title: "Ready to make your marketing *pay*?",
   description:
     "Tell us about your goals. A strategist replies within one business day with next steps and, if we are a fit, a free audit.",
   cta: { label: "Book a free strategy call", href: "/contact" },
@@ -356,11 +405,11 @@ export const ctaBand = {
 
 export const about = {
   eyebrow: "About us",
-  title: "A small team that treats your budget like our own",
+  title: "A small team that treats your budget like *our own*",
   description:
     "We started Growthline because too many agencies report on clicks and impressions while the business owner is left guessing whether marketing pays. We do it differently: fewer clients, senior people on every account and reporting that ends in revenue.",
   story: {
-    title: "Why we exist",
+    title: "Why we *exist*",
     paragraphs: [
       "Growthline began as two marketers who were tired of watching good budgets disappear into vanity metrics. We built the agency we wished we could hire: honest about what works, quick to cut what does not, and measured on your results.",
       "Today we are a team of strategists, media buyers, writers and analysts working with ecommerce, SaaS, local service and education brands. Every account has a named lead, a live dashboard and a monthly review where we show wins and misses alike.",
@@ -373,7 +422,7 @@ export const about = {
     { title: "Always testing", body: "Weekly experiments, a visible test log and decisions based on evidence." },
   ],
   team: {
-    title: "The people behind your campaigns",
+    title: "The people behind your *campaigns*",
     members: [
       { name: "Alex Morgan", role: "Founder and Strategy Lead" },
       { name: "Sam Rivera", role: "Head of Paid Media" },
@@ -384,7 +433,9 @@ export const about = {
 };
 
 export const faq = {
-  title: "Questions we hear a lot",
+  title: "Questions we hear *a lot*",
+  description:
+    "Straight answers on timelines, contracts and reporting. Anything else, ask us directly.",
   items: [
     {
       question: "How soon will we see results?",
@@ -421,7 +472,7 @@ export const faq = {
 
 export const contact = {
   eyebrow: "Contact",
-  title: "Let's talk about your growth",
+  title: "Let's talk about your *growth*",
   description:
     "Tell us about your goals. A strategist replies within one business day with next steps and, if we are a fit, a free audit.",
   budgets: ["Under $2k / month", "$2k to $5k / month", "$5k to $15k / month", "$15k+ / month"],

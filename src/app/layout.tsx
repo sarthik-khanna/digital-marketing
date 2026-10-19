@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Geist } from "next/font/google";
+import { Geist, Instrument_Serif, Outfit } from "next/font/google";
 import { MotionProvider } from "@/components/motion-provider";
 import { Footer } from "@/components/sections/footer";
 import { SiteNavbar } from "@/components/sections/site-navbar";
@@ -11,9 +11,17 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const display = Bricolage_Grotesque({
+const display = Outfit({
   variable: "--font-display",
   weight: "600",
+  subsets: ["latin"],
+});
+
+// Only for the one accented word in a headline (see <Accented>).
+const serif = Instrument_Serif({
+  variable: "--font-serif",
+  weight: "400",
+  style: "italic",
   subsets: ["latin"],
 });
 
@@ -31,15 +39,15 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0f0e0d",
-  colorScheme: "dark",
+  themeColor: "#f6f5fb",
+  colorScheme: "light",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${display.variable} dark h-full`}
+      className={`${geistSans.variable} ${display.variable} ${serif.variable} h-full`}
     >
       <body className="flex min-h-full flex-col">
         <a

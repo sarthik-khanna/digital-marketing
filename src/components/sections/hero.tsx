@@ -1,68 +1,90 @@
-import Link from "next/link";
-import { IconArrowRight } from "@tabler/icons-react";
-import { FlipWords } from "@/components/ui/flip-words";
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
-import { Spotlight } from "@/components/ui/spotlight-new";
-import { hero } from "@/lib/content";
-
-// Spotlight demo colours are blue; these are the brand orange equivalents.
-const spotlight = {
-  gradientFirst:
-    "radial-gradient(68.54% 68.72% at 55.02% 31.46%, hsla(24, 100%, 70%, .10) 0, hsla(24, 100%, 55%, .03) 50%, hsla(24, 100%, 45%, 0) 80%)",
-  gradientSecond:
-    "radial-gradient(50% 50% at 50% 50%, hsla(24, 100%, 70%, .07) 0, hsla(24, 100%, 55%, .02) 80%, transparent 100%)",
-  gradientThird:
-    "radial-gradient(50% 50% at 50% 50%, hsla(24, 100%, 70%, .05) 0, hsla(24, 100%, 45%, .02) 80%, transparent 100%)",
-};
+import Image from "next/image";
+import { IconStarFilled } from "@tabler/icons-react";
+import { ArrowLink } from "@/components/arrow-link";
+import { Sparkle } from "@/components/sparkle";
+import { hero, testimonials } from "@/lib/content";
+import { testimonialPhotos } from "@/lib/images";
+import { HeroVisual } from "./hero-visual";
+import { Accented } from "./section-heading";
 
 export function Hero() {
-  const fullHeadline = `${hero.headlineStart} ${hero.flipWords.join(", ")}.`;
-
   return (
-    <section className="relative isolate flex min-h-svh items-center justify-center overflow-hidden px-4 pt-32 pb-20">
-      <Spotlight {...spotlight} />
+    <section className="relative isolate overflow-hidden px-4 pt-32 pb-20 md:pt-40">
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-grid" />
+      <div
+        aria-hidden="true"
+        className="absolute -top-32 -left-40 -z-10 size-[36rem] rounded-full bg-tint-rose/60 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute top-20 right-[-10%] -z-10 size-[40rem] rounded-full bg-primary/15 blur-3xl"
+      />
+      <Sparkle className="top-36 left-[46%] hidden lg:block" />
 
-      <div className="relative z-50 mx-auto max-w-4xl text-center">
-        <p className="inline-flex rounded-full border border-border bg-card/60 px-4 py-1.5 text-sm text-muted-foreground backdrop-blur">
-          {hero.eyebrow}
-        </p>
+      <div className="mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-[1.05fr_1fr]">
+        <div>
+          <p className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 text-sm font-medium shadow-sm">
+            <span
+              aria-hidden="true"
+              className="size-2 rounded-full bg-lime ring-4 ring-lime/30"
+            />
+            {hero.eyebrow}
+          </p>
 
-        <h1 className="mt-6 text-5xl leading-[1.05] font-semibold text-balance sm:text-6xl md:text-7xl">
-          <span className="sr-only">{fullHeadline}</span>
-          <span aria-hidden="true">
-            {hero.headlineStart}
-            <span className="mt-1 block min-h-[1.15em]">
-              <FlipWords
-                words={hero.flipWords}
-                className="text-primary"
-                duration={2800}
-              />
-            </span>
-          </span>
-        </h1>
+          <h1 className="mt-6 text-5xl leading-[1.02] font-semibold text-balance sm:text-6xl xl:text-7xl">
+            <Accented text={hero.headline} />
+          </h1>
 
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-pretty text-muted-foreground md:text-xl">
-          {hero.subheading}
-        </p>
+          <p className="mt-6 max-w-xl text-lg text-pretty text-muted-foreground">
+            {hero.subheading}
+          </p>
 
-        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link href={hero.primaryCta.href}>
-            <HoverBorderGradient
-              as="div"
-              containerClassName="rounded-full"
-              className="flex items-center gap-2 px-7 py-3.5 text-base font-medium"
-            >
-              {hero.primaryCta.label}
-              <IconArrowRight className="size-4" aria-hidden="true" />
-            </HoverBorderGradient>
-          </Link>
-          <a
-            href={hero.secondaryCta.href}
-            className="rounded-full px-6 py-3.5 text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            {hero.secondaryCta.label}
-          </a>
+          <div className="mt-9 flex flex-wrap items-center gap-3">
+            <ArrowLink href={hero.primaryCta.href}>{hero.primaryCta.label}</ArrowLink>
+            <ArrowLink href={hero.secondaryCta.href} variant="outline">
+              {hero.secondaryCta.label}
+            </ArrowLink>
+          </div>
+
+          <ul aria-label="What we do" className="mt-10 flex max-w-lg flex-wrap gap-2">
+            {hero.tags.map((tag) => (
+              <li
+                key={tag}
+                className="rounded-full border border-foreground/15 px-3.5 py-1 text-xs font-medium text-muted-foreground"
+              >
+                {tag}
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-10 flex items-center gap-4 border-t border-border pt-6">
+            <div aria-hidden="true" className="flex -space-x-3">
+              {testimonials.items.slice(0, 4).map((person) => (
+                <Image
+                  key={person.name}
+                  src={testimonialPhotos[person.name]}
+                  alt=""
+                  width={44}
+                  height={44}
+                  className="size-11 rounded-full border-2 border-background object-cover"
+                />
+              ))}
+            </div>
+            <div>
+              <p className="flex items-center gap-1.5 text-sm font-semibold">
+                <span aria-hidden="true" className="flex text-primary">
+                  {Array.from({ length: 5 }, (_, i) => (
+                    <IconStarFilled key={i} className="size-3.5" />
+                  ))}
+                </span>
+                {hero.proof.rating}
+              </p>
+              <p className="text-sm text-muted-foreground">{hero.proof.label}</p>
+            </div>
+          </div>
         </div>
+
+        <HeroVisual />
       </div>
     </section>
   );

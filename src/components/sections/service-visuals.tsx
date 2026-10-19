@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 /** Small decorative panels for the service cards. All aria-hidden. */
 
 const frame =
-  "relative flex min-h-28 flex-1 overflow-hidden rounded-xl border border-border bg-secondary/50";
+  "relative flex flex-1 overflow-hidden rounded-2xl bg-card/80";
 
 function Seo() {
   const rows = [
@@ -29,7 +29,7 @@ function Seo() {
               "h-2.5 rounded-full transition-all duration-300",
               row.width,
               row.active
-                ? "bg-primary group-hover/bento:w-11/12"
+                ? "bg-primary group-hover:w-11/12"
                 : "bg-foreground/15",
             )}
           />
@@ -48,7 +48,7 @@ function Ppc() {
           key={i}
           style={{ height: `${height}%` }}
           className={cn(
-            "w-full max-w-5 origin-bottom rounded-t-md transition-transform duration-300 group-hover/bento:scale-y-105",
+            "w-full max-w-5 origin-bottom rounded-t-md transition-transform duration-300 group-hover:scale-y-105",
             i === bars.length - 1 ? "bg-primary" : "bg-foreground/15",
           )}
         />
@@ -104,10 +104,11 @@ const visuals: Record<ServiceId, () => React.JSX.Element> = {
   meta: Meta,
 };
 
-export function ServiceVisual({ id }: { id: ServiceId }) {
+/** `compact` is the smaller chip that floats over a photo. */
+export function ServiceVisual({ id, compact = false }: { id: ServiceId; compact?: boolean }) {
   const Visual = visuals[id];
   return (
-    <div aria-hidden="true" className="flex min-h-28 flex-1">
+    <div aria-hidden="true" className={cn("flex flex-1", compact ? "min-h-20" : "min-h-28")}>
       <Visual />
     </div>
   );

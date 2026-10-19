@@ -1,8 +1,11 @@
+import Link from "next/link";
+import { IconChevronRight } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
+import { Accented } from "./section-heading";
 
 /**
- * Hero for inner pages. Pure server markup with a static CSS glow, so it
- * adds no JavaScript to the page.
+ * Hero for inner pages: breadcrumb, accented title, and optional actions.
+ * Pure server markup with a static CSS grid and glow.
  */
 export function PageHero({
   eyebrow,
@@ -24,22 +27,35 @@ export function PageHero({
         className,
       )}
     >
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-grid" />
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 -z-10 h-[34rem] bg-[radial-gradient(60%_60%_at_50%_0%,oklch(0.72_0.19_48/0.18),transparent)]"
+        className="absolute -top-56 left-1/2 -z-10 size-[44rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl"
       />
-      <div className="mx-auto max-w-3xl">
-        <p className="text-sm font-medium tracking-widest text-primary uppercase">
-          {eyebrow}
-        </p>
-        <h1 className="mt-4 text-4xl leading-[1.08] font-semibold text-balance sm:text-5xl md:text-6xl">
-          {title}
+      <div className="mx-auto max-w-4xl">
+        <nav aria-label="Breadcrumb" className="flex justify-center">
+          <ol className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-4 py-1.5 text-sm shadow-sm">
+            <li>
+              <Link href="/" className="text-muted-foreground transition-colors hover:text-foreground">
+                Home
+              </Link>
+            </li>
+            <li aria-hidden="true">
+              <IconChevronRight className="size-3.5 text-muted-foreground" />
+            </li>
+            <li aria-current="page" className="font-medium text-primary">
+              {eyebrow}
+            </li>
+          </ol>
+        </nav>
+        <h1 className="mt-6 text-4xl leading-[1.05] font-semibold text-balance sm:text-5xl md:text-7xl">
+          <Accented text={title} />
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-pretty text-muted-foreground md:text-xl">
           {description}
         </p>
         {children && (
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-10 flex flex-col items-center justify-center gap-x-6 gap-y-4 sm:flex-row">
             {children}
           </div>
         )}

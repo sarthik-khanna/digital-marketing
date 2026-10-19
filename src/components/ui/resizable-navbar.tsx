@@ -106,8 +106,8 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         minWidth: "800px",
       }}
       className={cn(
-        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-2 lg:flex dark:bg-transparent",
-        visible && "bg-background/80",
+        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-2 lg:flex",
+        visible && "bg-card/85",
         className,
       )}
     >
@@ -137,9 +137,9 @@ export const NavItems = ({
           onClick={onItemClick}
           aria-current={activeLink === item.link ? "page" : undefined}
           className={cn(
-            "relative rounded-full px-3 py-2 transition-colors hover:bg-accent hover:text-foreground",
+            "relative rounded-full px-3 py-2 transition-colors hover:bg-secondary hover:text-foreground",
             activeLink === item.link
-              ? "bg-accent/60 text-foreground"
+              ? "bg-secondary text-primary"
               : "text-muted-foreground",
           )}
           key={item.link}
@@ -173,7 +173,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
       }}
       className={cn(
         "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:hidden",
-        visible && "bg-background/80",
+        visible && "bg-card/85",
         className,
       )}
     >
@@ -252,11 +252,11 @@ export const NavbarLogo = ({ name }: { name: string }) => {
     >
       <span
         aria-hidden="true"
-        className="flex size-7 items-center justify-center rounded-lg bg-primary font-heading text-sm font-bold text-primary-foreground"
+        className="flex size-8 items-center justify-center rounded-lg bg-primary font-heading text-sm text-primary-foreground"
       >
         {name.charAt(0)}
       </span>
-      <span className="font-heading text-base font-semibold text-foreground">
+      <span className="font-heading text-lg text-foreground">
         {name}
       </span>
     </Link>
