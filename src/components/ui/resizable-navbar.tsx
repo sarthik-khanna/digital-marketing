@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
@@ -103,10 +104,13 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         damping: 50,
       }}
       style={{
-        minWidth: "800px",
+        // Room for the links plus two compact buttons on the right.
+        minWidth: "860px",
       }}
+      // Lets children restyle themselves for the shrunken, scrolled bar.
+      data-scrolled={visible ? "true" : undefined}
       className={cn(
-        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-2 lg:flex",
+        "group/nav relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-2 lg:flex",
         visible && "bg-card/85",
         className,
       )}
@@ -243,22 +247,27 @@ export const MobileNavToggle = ({
   );
 };
 
-export const NavbarLogo = ({ name }: { name: string }) => {
+export const NavbarLogo = ({
+  name,
+  logo,
+}: {
+  name: string;
+  logo: { src: string; width: number; height: number };
+}) => {
   return (
     <Link
       href="/"
       aria-label={`${name} home`}
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal"
+      className="relative z-20 mr-4 flex items-center px-2 py-1"
     >
-      <span
-        aria-hidden="true"
-        className="flex size-8 items-center justify-center rounded-lg bg-primary font-heading text-sm text-primary-foreground"
-      >
-        {name.charAt(0)}
-      </span>
-      <span className="font-heading text-lg text-foreground">
-        {name}
-      </span>
+      <Image
+        src={logo.src}
+        alt=""
+        width={logo.width}
+        height={logo.height}
+        preload
+        className="h-10 w-auto"
+      />
     </Link>
   );
 };

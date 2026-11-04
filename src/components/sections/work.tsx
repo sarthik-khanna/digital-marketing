@@ -6,6 +6,9 @@ import { cn } from "@/lib/utils";
 import { SectionHeading } from "./section-heading";
 
 export function Work() {
+  // Hidden until real case studies are added in content.ts.
+  if (work.items.length === 0) return null;
+
   const items = work.items.map((item, i) => ({ ...item, image: workPhotos[i]?.src }));
 
   return (
@@ -34,7 +37,7 @@ export function Work() {
               <Image src={item.image} alt="" fill sizes="28rem" className="-z-20 object-cover" />
             )}
             <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-ink/90 via-ink/40 to-ink/10" />
-            <p className="text-xs font-medium tracking-widest text-lime uppercase">
+            <p className="text-xs font-medium tracking-widest text-highlight uppercase">
               {item.tag}
             </p>
             <h3 className="mt-2 text-xl font-semibold">{item.title}</h3>

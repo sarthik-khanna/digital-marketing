@@ -1,17 +1,22 @@
 /**
- * Brand and contact details. "Growthline" is a PLACEHOLDER name:
- * change it here and it updates the whole site.
+ * Brand and contact details. Change them here and the whole site updates.
+ * Leave a contact field empty to hide it everywhere until it is known.
  */
 export const site = {
-  name: "Growthline",
-  tagline: "Digital marketing that pays for itself",
+  name: "Tech Digital Marketer",
+  /** Short form for tight spaces (footer wordmark). */
+  shortName: "TDM",
+  tagline: "SEO, Google Ads & Meta Ads Agency in India",
   description:
-    "Growthline is a digital marketing agency for ambitious brands: SEO, PPC, performance marketing and Meta ads, measured against revenue.",
+    "Tech Digital Marketer is a digital marketing agency for growing Indian businesses: SEO, Google Ads, performance marketing and Meta ads, measured on enquiries and sales.",
   /** Set NEXT_PUBLIC_SITE_URL in production; used for the sitemap and canonical URLs. */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://growthline.example",
-  email: "hello@growthline.example",
-  phone: "+1 (555) 010-2030",
-  address: "100 Market Street, Suite 400, Your City",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://techdigitalmarketer.com",
+  /** Wordmark shown in the navbar. The favicon lives in src/app (icon.png, apple-icon.png, favicon.ico). */
+  logo: { src: "/brand/tdm-logo.png", width: 238, height: 160 },
+  // TODO: real contact details. Empty values are hidden on the site.
+  email: "" as string,
+  phone: "" as string,
+  address: "" as string,
   nav: [
     { name: "Home", link: "/" },
     { name: "SEO", link: "/seo" },
@@ -21,11 +26,8 @@ export const site = {
     { name: "About", link: "/about" },
   ],
   cta: { name: "Contact us", link: "/contact" },
-  social: [
-    { name: "LinkedIn", href: "https://www.linkedin.com" },
-    { name: "Instagram", href: "https://www.instagram.com" },
-    { name: "X", href: "https://x.com" },
-  ],
+  // TODO: full profile URLs, e.g. https://www.linkedin.com/company/<your-page>. Empty = hidden.
+  social: [] as { name: string; href: string }[],
 } as const;
 
 /** Every indexable route, used by the sitemap. */

@@ -47,7 +47,7 @@ export const WobbleCard = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setOffset(0, 0)}
       className={cn(
-        "group/wobble relative mx-auto w-full overflow-hidden rounded-3xl bg-primary shadow-[0_12px_32px_-16px_oklch(0.21_0.035_275/0.35)]",
+        "group/wobble relative mx-auto w-full overflow-hidden rounded-3xl bg-primary shadow-[0_12px_32px_-16px_oklch(0.19_0.06_264/0.35)]",
         "[transform:translate3d(var(--wobble-x,0px),var(--wobble-y,0px),0)] transition-transform duration-100 ease-out motion-reduce:transform-none",
         containerClassName,
       )}

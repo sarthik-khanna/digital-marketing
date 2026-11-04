@@ -18,6 +18,9 @@ function Wordmark({ name }: { name: string }) {
 }
 
 export function Clients() {
+  // Hidden until real client names are added in content.ts.
+  if (clients.length === 0) return null;
+
   // The list is doubled so the -50% translate in globals.css loops seamlessly.
   const logos = [...clients, ...clients].map((name, i) => (
     <Wordmark key={`${name}-${i}`} name={name} />
@@ -30,7 +33,7 @@ export function Clients() {
     >
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 md:flex-row md:gap-10">
         <p className="shrink-0 text-sm font-medium text-muted-foreground md:max-w-36">
-          Trusted by 120+ growing brands
+          Brands we have worked with
         </p>
         <LogoSlider
           logos={logos}

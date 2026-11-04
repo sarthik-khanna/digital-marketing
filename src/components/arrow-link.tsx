@@ -9,14 +9,14 @@ const variants = {
   },
   ink: {
     button: "bg-ink text-ink-foreground hover:bg-ink/90",
-    chip: "bg-lime text-lime-foreground",
+    chip: "bg-highlight text-highlight-foreground",
   },
   outline: {
     button: "border border-primary/40 bg-card/60 text-primary hover:border-primary",
     chip: "bg-primary text-primary-foreground",
   },
-  lime: {
-    button: "bg-lime text-lime-foreground hover:bg-lime/90",
+  highlight: {
+    button: "bg-highlight text-highlight-foreground hover:bg-highlight/90",
     chip: "bg-ink text-ink-foreground",
   },
 } as const;

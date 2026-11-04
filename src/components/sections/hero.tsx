@@ -1,9 +1,7 @@
-import Image from "next/image";
-import { IconStarFilled } from "@tabler/icons-react";
+import { IconCircleCheckFilled } from "@tabler/icons-react";
 import { ArrowLink } from "@/components/arrow-link";
 import { Sparkle } from "@/components/sparkle";
-import { hero, testimonials } from "@/lib/content";
-import { testimonialPhotos } from "@/lib/images";
+import { hero } from "@/lib/content";
 import { HeroVisual } from "./hero-visual";
 import { Accented } from "./section-heading";
 
@@ -26,7 +24,7 @@ export function Hero() {
           <p className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 text-sm font-medium shadow-sm">
             <span
               aria-hidden="true"
-              className="size-2 rounded-full bg-lime ring-4 ring-lime/30"
+              className="size-2 rounded-full bg-highlight ring-4 ring-highlight/30"
             />
             {hero.eyebrow}
           </p>
@@ -57,31 +55,14 @@ export function Hero() {
             ))}
           </ul>
 
-          <div className="mt-10 flex items-center gap-4 border-t border-border pt-6">
-            <div aria-hidden="true" className="flex -space-x-3">
-              {testimonials.items.slice(0, 4).map((person) => (
-                <Image
-                  key={person.name}
-                  src={testimonialPhotos[person.name]}
-                  alt=""
-                  width={44}
-                  height={44}
-                  className="size-11 rounded-full border-2 border-background object-cover"
-                />
-              ))}
-            </div>
-            <div>
-              <p className="flex items-center gap-1.5 text-sm font-semibold">
-                <span aria-hidden="true" className="flex text-primary">
-                  {Array.from({ length: 5 }, (_, i) => (
-                    <IconStarFilled key={i} className="size-3.5" />
-                  ))}
-                </span>
-                {hero.proof.rating}
-              </p>
-              <p className="text-sm text-muted-foreground">{hero.proof.label}</p>
-            </div>
-          </div>
+          <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-2 border-t border-border pt-6 text-sm font-medium">
+            {hero.assurances.map((item) => (
+              <li key={item} className="flex items-center gap-2">
+                <IconCircleCheckFilled className="size-4 text-primary" aria-hidden="true" />
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <HeroVisual />
