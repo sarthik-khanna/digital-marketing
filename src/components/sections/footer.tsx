@@ -1,8 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
-import { services } from "@/lib/content";
+import { services } from "@/lib/services";
 import { site } from "@/lib/site";
 
-const linkClass = "text-ink-foreground/65 transition-colors hover:text-lime";
+const linkClass = "text-ink-foreground/65 transition-colors hover:text-highlight";
 
 const credits = [
   { name: "Aceternity UI", href: "https://ui.aceternity.com" },
@@ -15,13 +16,8 @@ export function Footer() {
     <footer className="overflow-hidden bg-ink px-4 pt-16 text-ink-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
         <div className="max-w-sm">
-          <p className="flex items-center gap-2 font-heading text-xl">
-            <span
-              aria-hidden="true"
-              className="flex size-8 items-center justify-center rounded-lg bg-lime text-sm text-lime-foreground"
-            >
-              {site.name.charAt(0)}
-            </span>
+          <p className="flex items-center gap-3 font-heading text-xl">
+            <Image src="/brand/tdm-app-icon.png" alt="" width={40} height={40} className="size-10 rounded-lg" />
             {site.name}
           </p>
           <p className="mt-4 text-sm text-ink-foreground/65">{site.description}</p>
@@ -33,7 +29,7 @@ export function Footer() {
             {services.map((service) => (
               <li key={service.id}>
                 <Link href={service.href} className={linkClass}>
-                  {service.name}
+                  {service.title}
                 </Link>
               </li>
             ))}
@@ -66,17 +62,26 @@ export function Footer() {
         <div>
           <p className="text-sm font-semibold">Get in touch</p>
           <ul className="mt-4 space-y-3 text-sm">
+            {site.email && (
+              <li>
+                <a href={`mailto:${site.email}`} className={linkClass}>
+                  {site.email}
+                </a>
+              </li>
+            )}
+            {site.phone && (
+              <li>
+                <a href={`tel:${site.phone.replace(/[^+\d]/g, "")}`} className={linkClass}>
+                  {site.phone}
+                </a>
+              </li>
+            )}
+            {site.address && <li className="text-ink-foreground/65">{site.address}</li>}
             <li>
-              <a href={`mailto:${site.email}`} className={linkClass}>
-                {site.email}
-              </a>
+              <Link href="/contact" className={linkClass}>
+                Get a free audit
+              </Link>
             </li>
-            <li>
-              <a href={`tel:${site.phone.replace(/[^+\d]/g, "")}`} className={linkClass}>
-                {site.phone}
-              </a>
-            </li>
-            <li className="text-ink-foreground/65">{site.address}</li>
           </ul>
         </div>
       </div>
@@ -91,7 +96,7 @@ export function Footer() {
                 href={credit.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline-offset-4 hover:text-lime hover:underline"
+                className="underline-offset-4 hover:text-highlight hover:underline"
               >
                 {credit.name}
               </a>
@@ -106,7 +111,7 @@ export function Footer() {
         aria-hidden="true"
         className="mx-auto -mb-[0.22em] max-w-7xl text-center font-heading text-[20vw] leading-none tracking-tighter text-white/[0.06] select-none xl:text-[16rem]"
       >
-        {site.name}
+        {site.shortName}
       </p>
     </footer>
   );

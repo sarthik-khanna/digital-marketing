@@ -8,7 +8,7 @@
  * next.config.ts.
  */
 
-import type { ServiceId } from "@/lib/content";
+import type { ServiceId } from "@/lib/services";
 
 export type Photo = { src: string; alt: string; width?: number; height?: number };
 
@@ -71,19 +71,8 @@ export const workPhotos: Photo[] = [
   { src: unsplash("1557804506-669a67965ba0"), alt: "" },
 ];
 
-/** Portraits for testimonials, keyed by the name in `testimonials.items`. */
-export const testimonialPhotos: Record<string, string> = {
-  "Priya Nair": unsplash("1534528741775-53994a69daeb"),
-  "Daniel Okafor": unsplash("1507003211169-0a1dd7228f2d"),
-  "Dr. Helen Marsh": unsplash("1508214751196-bcfd4ca60f91"),
-  "Marco Bellini": unsplash("1500648767791-00dcc994a43e"),
-  "Aisha Rahman": unsplash("1573497019940-1c28c88b4f3e"),
-};
+/** Portraits for testimonials, keyed by the name in `testimonials.items`. Real clients only. */
+export const testimonialPhotos: Record<string, string> = {};
 
-/** Portraits for the About page team, keyed by `about.team.members` name. */
-export const teamPhotos: Record<string, string> = {
-  "Alex Morgan": unsplash("1560250097-0b93528c311a"),
-  "Sam Rivera": unsplash("1494790108377-be9c29b29330"),
-  "Jordan Lee": unsplash("1472099645785-5658abf4ff4e"),
-  "Taylor Singh": unsplash("1580489944761-15a19d654956"),
-};
+/** Portraits for the About page team, keyed by `about.team.members` name. Real team only. */
+export const teamPhotos: Record<string, string> = {};

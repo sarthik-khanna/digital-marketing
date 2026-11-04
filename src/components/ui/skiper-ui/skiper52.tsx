@@ -97,7 +97,7 @@ const HoverExpand_001 = ({
                     exit={{ opacity: 0 }}
                     className="absolute inset-0 flex flex-col justify-end p-6"
                   >
-                    <p className="text-xs font-medium tracking-widest text-lime uppercase">
+                    <p className="text-xs font-medium tracking-widest text-highlight uppercase">
                       {item.tag}
                     </p>
                     <h3 className="mt-2 font-heading text-2xl font-semibold">

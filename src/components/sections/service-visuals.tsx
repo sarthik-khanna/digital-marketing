@@ -1,4 +1,4 @@
-import type { ServiceId } from "@/lib/content";
+import type { ServiceId } from "@/lib/services";
 import { cn } from "@/lib/utils";
 
 /** Small decorative panels for the service cards. All aria-hidden. */

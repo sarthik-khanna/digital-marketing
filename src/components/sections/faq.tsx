@@ -26,13 +26,19 @@ export function Faq({
           <div className="mt-10 rounded-3xl bg-ink p-7 text-ink-foreground">
             <p className="font-heading text-xl">Still have a question?</p>
             <p className="mt-2 text-sm text-ink-foreground/70">
-              Email{" "}
-              <a href={`mailto:${site.email}`} className="text-lime underline-offset-4 hover:underline">
-                {site.email}
-              </a>{" "}
-              or book a call and ask a strategist directly.
+              {site.email ? (
+                <>
+                  Email{" "}
+                  <a href={`mailto:${site.email}`} className="text-highlight underline-offset-4 hover:underline">
+                    {site.email}
+                  </a>{" "}
+                  or book a call and ask us directly.
+                </>
+              ) : (
+                "Send us your question through the contact form and we will reply within one working day."
+              )}
             </p>
-            <ArrowLink href="/contact" variant="lime" className="mt-6">
+            <ArrowLink href="/contact" variant="highlight" className="mt-6">
               Book a call
             </ArrowLink>
           </div>

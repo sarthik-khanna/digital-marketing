@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Instrument_Serif, Outfit } from "next/font/google";
 import { MotionProvider } from "@/components/motion-provider";
-import { Footer } from "@/components/sections/footer";
-import { SiteNavbar } from "@/components/sections/site-navbar";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -56,13 +54,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <MotionProvider>
-          <SiteNavbar />
-          <main id="main" className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </MotionProvider>
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );

@@ -4,7 +4,7 @@ import { IconArrowUpRight } from "@tabler/icons-react";
 import { ArrowLink } from "@/components/arrow-link";
 import { Sparkle } from "@/components/sparkle";
 import { WobbleCard } from "@/components/ui/wobble-card";
-import { services, type ServiceId } from "@/lib/content";
+import { services, type ServiceId } from "@/lib/services";
 import { servicePhotos } from "@/lib/images";
 import { cn } from "@/lib/utils";
 import { SectionHeading } from "./section-heading";
@@ -12,7 +12,7 @@ import { ServiceVisual } from "./service-visuals";
 
 const tints: Record<ServiceId, string> = {
   seo: "bg-tint-rose",
-  ppc: "bg-tint-violet",
+  ppc: "bg-tint-sky",
   performance: "bg-tint-amber",
   meta: "bg-tint-mint",
 };
@@ -51,7 +51,7 @@ export function Services() {
                     <span className="font-heading text-sm text-foreground/50">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="mt-3 text-2xl font-semibold sm:text-3xl">{service.name}</h3>
+                    <h3 className="mt-3 text-2xl font-semibold sm:text-3xl">{service.title}</h3>
                     <p className="mt-3 max-w-sm text-pretty text-foreground/75">{service.short}</p>
                     <span className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-card px-4 py-2 text-sm font-semibold text-primary">
                       Learn more
@@ -63,7 +63,7 @@ export function Services() {
                   </div>
                   <div
                     className={cn(
-                      "relative overflow-hidden rounded-2xl bg-card/60 shadow-[0_16px_40px_-24px_oklch(0.21_0.035_275/0.5)]",
+                      "relative overflow-hidden rounded-2xl bg-card/60 shadow-[0_16px_40px_-24px_oklch(0.19_0.06_264/0.5)]",
                       wide ? "aspect-[4/3]" : "aspect-[16/10]",
                     )}
                   >

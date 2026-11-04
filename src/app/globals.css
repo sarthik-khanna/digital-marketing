@@ -29,12 +29,20 @@
   --color-card: var(--card);
   --color-ink: var(--ink);
   --color-ink-foreground: var(--ink-foreground);
-  --color-lime: var(--lime);
-  --color-lime-foreground: var(--lime-foreground);
+  --color-highlight: var(--highlight);
+  --color-highlight-foreground: var(--highlight-foreground);
   --color-tint-rose: var(--tint-rose);
-  --color-tint-violet: var(--tint-violet);
+  --color-tint-sky: var(--tint-sky);
   --color-tint-amber: var(--tint-amber);
   --color-tint-mint: var(--tint-mint);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -65,41 +73,76 @@
       transform: translateY(-10px);
     }
   }
+
+  /* Aceternity spotlight: sweeps in once behind the service hero. */
+  --animate-spotlight: spotlight 2s ease 0.4s 1 forwards;
+
+  @keyframes spotlight {
+    0% {
+      opacity: 0;
+      transform: translate(-72%, -62%) scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -40%) scale(1);
+    }
+  }
+
+  /* Text-generate effect: each headline word fades and unblurs in turn. */
+  --animate-word-in: word-in 0.45s ease-out both;
+
+  @keyframes word-in {
+    to {
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
 }
 
 /*
  * Brand tokens. One light theme: a cool lavender-white canvas, deep ink text,
- * a violet primary and a lime highlight used sparingly (badges, markers).
+ * a royal-blue primary and an orange highlight used sparingly (badges, markers).
  * `ink` is the dark surface for the footer, CTA and case-study panels.
  */
 :root {
-  --background: oklch(0.975 0.007 285);
-  --foreground: oklch(0.21 0.035 275);
+  /* Logo colours: navy #020A28, royal blue #0048F8, orange #F86800. */
+  --background: oklch(0.977 0.006 264);
+  --foreground: oklch(0.19 0.06 264);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.21 0.035 275);
+  --card-foreground: oklch(0.19 0.06 264);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.21 0.035 275);
-  --primary: oklch(0.52 0.24 277);
+  --popover-foreground: oklch(0.19 0.06 264);
+  --primary: oklch(0.505 0.265 263.4);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.945 0.022 285);
-  --secondary-foreground: oklch(0.21 0.035 275);
-  --muted: oklch(0.95 0.012 285);
-  --muted-foreground: oklch(0.47 0.03 275);
-  --accent: oklch(0.935 0.03 285);
-  --accent-foreground: oklch(0.21 0.035 275);
+  --secondary: oklch(0.95 0.02 264);
+  --secondary-foreground: oklch(0.19 0.06 264);
+  --muted: oklch(0.955 0.01 264);
+  --muted-foreground: oklch(0.46 0.03 264);
+  --accent: oklch(0.94 0.03 264);
+  --accent-foreground: oklch(0.19 0.06 264);
   --destructive: oklch(0.58 0.22 25);
-  --border: oklch(0.21 0.035 275 / 9%);
-  --input: oklch(0.21 0.035 275 / 16%);
-  --ring: oklch(0.52 0.24 277);
-  --ink: oklch(0.19 0.04 277);
-  --ink-foreground: oklch(0.97 0.01 285);
-  --lime: oklch(0.9 0.19 124);
-  --lime-foreground: oklch(0.21 0.035 275);
+  --border: oklch(0.19 0.06 264 / 9%);
+  --input: oklch(0.19 0.06 264 / 16%);
+  --ring: oklch(0.505 0.265 263.4);
+  --ink: oklch(0.16 0.064 264);
+  --ink-foreground: oklch(0.97 0.01 264);
+  /* Orange from the logo arrow. Fill with navy text, or text on ink; never small text on white (3:1). */
+  --highlight: oklch(0.688 0.196 45.1);
+  --highlight-foreground: oklch(0.16 0.064 264);
   /* Pastel card tints (service cards, mission/vision cards, page glows). */
-  --tint-rose: oklch(0.9 0.06 350);
-  --tint-violet: oklch(0.87 0.07 285);
-  --tint-amber: oklch(0.93 0.07 90);
-  --tint-mint: oklch(0.92 0.07 160);
+  --tint-rose: oklch(0.92 0.05 20);
+  --tint-sky: oklch(0.88 0.07 255);
+  --tint-amber: oklch(0.93 0.07 70);
+  --tint-mint: oklch(0.92 0.06 175);
+  /* Admin sidebar (shadcn): white panel, blue active item. */
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
   --radius: 0.75rem;
 }
 
@@ -168,5 +211,20 @@
   .animate-float,
   .animate-spin-slow {
     animation: none;
+  }
+  /* Spotlight shows in its final position instead of sweeping in. */
+  .animate-spotlight {
+    animation: none;
+    opacity: 1;
+    transform: translate(-50%, -40%);
+  }
+  /* Admin sidebar collapse/expand */
+  [data-slot^="sidebar"] {
+    transition: none !important;
+  }
+  /* Call-back dialog fade and zoom */
+  [data-slot="dialog-overlay"],
+  [data-slot="dialog-content"] {
+    animation: none !important;
   }
 }

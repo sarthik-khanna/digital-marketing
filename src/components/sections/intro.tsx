@@ -18,7 +18,7 @@ export function Intro() {
       <Sparkle className="top-20 right-[30%] hidden lg:block" />
 
       <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.9fr_1.2fr_0.7fr] lg:gap-14">
-        <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-t-[12rem] rounded-b-[2rem] bg-tint-violet">
+        <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-t-[12rem] rounded-b-[2rem] bg-tint-sky">
           <Image
             src={photos.introTeam.src}
             alt={photos.introTeam.alt}

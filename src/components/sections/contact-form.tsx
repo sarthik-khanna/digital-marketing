@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { submitInquiry, type InquiryState } from "@/app/actions";
+import { Honeypot } from "@/components/honeypot";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,7 +13,16 @@ const initialState: InquiryState = {
   status: "idle",
   message: "",
   errors: {},
-  values: { name: "", email: "", company: "", interest: "", budget: "", message: "" },
+  values: {
+    name: "",
+    email: "",
+    phone: "",
+    location: "",
+    company: "",
+    interest: "",
+    budget: "",
+    message: "",
+  },
 };
 
 const selectClass =
@@ -65,6 +75,43 @@ export function ContactForm() {
             className="h-11 rounded-xl px-3"
           />
           <FieldError id="email-error" message={state.errors.email} />
+        </div>
+      </div>
+
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <Label htmlFor="phone" className="mb-2">
+            Phone number
+          </Label>
+          <Input
+            id="phone"
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            required
+            defaultValue={state.values.phone}
+            aria-invalid={!!state.errors.phone}
+            aria-describedby={state.errors.phone ? "phone-error" : undefined}
+            className="h-11 rounded-xl px-3"
+          />
+          <FieldError id="phone-error" message={state.errors.phone} />
+        </div>
+        <div>
+          <Label htmlFor="location" className="mb-2">
+            Location
+          </Label>
+          <Input
+            id="location"
+            name="location"
+            autoComplete="address-level2"
+            placeholder="City, country"
+            required
+            defaultValue={state.values.location}
+            aria-invalid={!!state.errors.location}
+            aria-describedby={state.errors.location ? "location-error" : undefined}
+            className="h-11 rounded-xl px-3"
+          />
+          <FieldError id="location-error" message={state.errors.location} />
         </div>
       </div>
 
@@ -136,13 +183,7 @@ export function ContactForm() {
         <FieldError id="message-error" message={state.errors.message} />
       </div>
 
-      {/* Honeypot for bots; hidden from people and assistive tech. */}
-      <div aria-hidden="true" className="absolute -left-[9999px]">
-        <label>
-          Website
-          <input type="text" name="website" tabIndex={-1} autoComplete="off" />
-        </label>
-      </div>
+      <Honeypot />
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
         <Button type="submit" disabled={pending} className="h-12 rounded-full px-8 text-sm font-semibold">

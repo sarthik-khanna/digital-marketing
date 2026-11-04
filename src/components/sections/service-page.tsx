@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { IconArrowUpRight, IconCheck } from "@tabler/icons-react";
 import { ArrowLink } from "@/components/arrow-link";
-import { services, type Service } from "@/lib/content";
+import { services, type Service } from "@/lib/services";
 import { CtaBand } from "./cta-band";
 import { Faq } from "./faq";
 import { PageHero } from "./page-hero";
@@ -20,7 +20,7 @@ export function ServicePage({ service }: { service: Service }) {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: service.faq.map((item) => ({
+    mainEntity: service.faqs.map((item) => ({
       "@type": "Question",
       name: item.question,
       acceptedAnswer: { "@type": "Answer", text: item.answer },
@@ -31,8 +31,8 @@ export function ServicePage({ service }: { service: Service }) {
     <>
       <PageHero
         eyebrow={service.eyebrow}
-        title={service.headline}
-        description={service.subheading}
+        title={service.h1}
+        description={service.subtitle}
       >
         <ArrowLink href="/contact">Get a free audit</ArrowLink>
         <a
@@ -48,10 +48,10 @@ export function ServicePage({ service }: { service: Service }) {
       <section id="included" className="scroll-mt-24 px-4 py-24">
         <SectionHeading
           eyebrow="What's included"
-          title={`Everything in our ${service.name} *service*`}
+          title={`Everything in our ${service.title} *service*`}
         />
         <ul className="mx-auto mt-14 grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {service.included.map((item, index) => (
+          {service.deliverables.map((item, index) => (
             <li
               key={item.title}
               className="rounded-3xl border border-border bg-card p-7 transition-colors hover:border-primary/30"
@@ -75,13 +75,13 @@ export function ServicePage({ service }: { service: Service }) {
         eyebrow="Process"
         title="How it *works*"
         description="Four stages, with a review at the end of every month."
-        steps={service.process}
+        steps={service.steps}
       />
 
       <Faq
-        items={service.faq}
-        title={`${service.name} questions, *answered*`}
-        description={`What clients usually ask before starting ${service.name} with us.`}
+        items={service.faqs}
+        title={`${service.title} questions, *answered*`}
+        description={`What clients usually ask before starting ${service.title} with us.`}
       />
 
       <section aria-labelledby="related-title" className="px-4 pb-12">
@@ -96,7 +96,7 @@ export function ServicePage({ service }: { service: Service }) {
                 className="group flex h-full flex-col justify-between gap-6 rounded-3xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:border-primary/30 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
               >
                 <div>
-                  <h3 className="text-xl font-semibold">{item.name}</h3>
+                  <h3 className="text-xl font-semibold">{item.title}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{item.short}</p>
                 </div>
                 <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">

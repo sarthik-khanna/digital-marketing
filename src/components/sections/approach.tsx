@@ -7,7 +7,7 @@ import { photos } from "@/lib/images";
 import { cn } from "@/lib/utils";
 import { SectionHeading } from "./section-heading";
 
-const cardTints = ["bg-tint-violet", "bg-tint-rose"];
+const cardTints = ["bg-tint-sky", "bg-tint-rose"];
 
 function ArrowChip({ className }: { className?: string }) {
   return (
@@ -47,7 +47,7 @@ export function Approach() {
           />
           <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/10" />
           <ArrowChip className="size-14 bg-primary text-primary-foreground" />
-          <p className="text-sm font-semibold text-lime">{approach.feature.eyebrow}</p>
+          <p className="text-sm font-semibold text-highlight">{approach.feature.eyebrow}</p>
           <h3 className="mt-2 max-w-xl text-2xl font-semibold text-balance sm:text-3xl">
             {approach.feature.title}
           </h3>

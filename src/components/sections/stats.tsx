@@ -1,10 +1,9 @@
-import { CountingNumber } from "@/components/ui/counting-number";
 import { stats as defaultStats, type Stat } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 export function Stats({ items = defaultStats }: { items?: Stat[] }) {
   return (
-    <section aria-label="Results at a glance" className="px-4 py-12">
+    <section aria-label="How we work at a glance" className="px-4 py-12">
       <dl
         className={cn(
           "mx-auto grid max-w-7xl grid-cols-2 gap-3",
@@ -23,11 +22,7 @@ export function Stats({ items = defaultStats }: { items?: Stat[] }) {
             <dt className={cn("text-sm", i === 0 ? "text-primary-foreground/80" : "text-muted-foreground")}>
               {stat.label}
             </dt>
-            <dd className="font-heading text-4xl sm:text-5xl">
-              {stat.prefix}
-              <CountingNumber target={stat.value} decimals={stat.decimals} />
-              {stat.suffix}
-            </dd>
+            <dd className="font-heading text-3xl sm:text-4xl">{stat.value}</dd>
           </div>
         ))}
       </dl>
