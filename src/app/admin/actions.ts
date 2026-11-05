@@ -51,7 +51,8 @@ export async function logout() {
 
 /** Links point at the configured site URL in production; locally they follow the request. */
 async function origin() {
-  if (process.env.NODE_ENV === "production") return site.url;
+  // Trailing slash stripped so links never come out as "...com//admin/...".
+  if (process.env.NODE_ENV === "production") return site.url.replace(/\/+$/, "");
   const request = await headers();
   return `${request.get("x-forwarded-proto") ?? "http"}://${request.get("host")}`;
 }
