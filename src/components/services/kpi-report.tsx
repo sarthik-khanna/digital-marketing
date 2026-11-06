@@ -42,7 +42,7 @@ export function KpiReport({ service }: { service: Service }) {
         <div>
           <SectionHeading
             id="kpi-title"
-            eyebrow="Reporting"
+           
             title="The numbers we *report* on"
             description="Every month you see the metrics that tie to revenue, not just the ones that look good."
             align="left"

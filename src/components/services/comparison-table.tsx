@@ -9,7 +9,7 @@ export function ComparisonTable() {
     <section aria-labelledby="compare-title" className="px-4 py-20">
       <SectionHeading
         id="compare-title"
-        eyebrow="Why us"
+       
         title="Us vs a *typical* agency"
         description="Promises we put in writing, so you always know what you are paying for."
       />

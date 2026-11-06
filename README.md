@@ -19,8 +19,8 @@ npm run build    # production build
 | `/contact` | `src/app/contact/page.tsx` |
 
 Also generated: `/sitemap.xml`, `/robots.txt` and a 404 page. Every page is prerendered
-as static HTML. Set `NEXT_PUBLIC_SITE_URL` to the live domain for correct canonical URLs
-and sitemap entries.
+as static HTML. The live domain (`https://www.techdigitalmarketer.com`) is `url` in
+`src/lib/site.ts`; canonical URLs, the sitemap, robots.txt and reset links all use it.
 
 ## Make it the client's
 

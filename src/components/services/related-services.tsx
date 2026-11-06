@@ -6,7 +6,7 @@ import { getService, type Service } from "@/lib/services";
 export function RelatedServices({ service }: { service: Service }) {
   return (
     <section aria-labelledby="related-title" className="px-4 py-20">
-      <SectionHeading id="related-title" eyebrow="More services" title="Explore our *other* services" />
+      <SectionHeading id="related-title" title="Explore our *other* services" />
       <HoverEffect
         className="mx-auto mt-10 max-w-7xl"
         items={service.related.map((id) => {

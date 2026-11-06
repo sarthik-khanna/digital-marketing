@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { ServicePage } from "@/components/sections/service-page";
-import { services } from "@/lib/services";
+import { ServiceTemplate, serviceMetadata } from "@/components/services/service-template";
+import { getService } from "@/lib/services";
 
-const service = services.find((s) => s.id === "meta")!;
+const service = getService("meta");
 
-export const metadata: Metadata = {
-  title: service.metaTitle,
-  description: service.metaDescription,
-  alternates: { canonical: service.href },
-  openGraph: { title: service.metaTitle, description: service.metaDescription, url: service.href },
-};
+export const metadata: Metadata = serviceMetadata(service);
 
-export default function Page() {
-  return <ServicePage service={service} />;
+export default function MetaAdsPage() {
+  return <ServiceTemplate service={service} />;
 }

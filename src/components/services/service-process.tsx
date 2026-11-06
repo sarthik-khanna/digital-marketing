@@ -39,7 +39,7 @@ export function ServiceProcess({ service }: { service: Service }) {
     <section aria-labelledby="process-title" className="px-4 py-20">
       <SectionHeading
         id="process-title"
-        eyebrow="How it works"
+       
         title="Four steps, *reviewed* every month"
         className="mb-12 lg:mb-4"
       />

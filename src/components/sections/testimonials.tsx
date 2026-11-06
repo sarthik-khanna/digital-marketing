@@ -21,7 +21,6 @@ export function Testimonials() {
       <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 lg:flex-row lg:items-end lg:justify-between">
         <SectionHeading
           id="testimonials-title"
-          eyebrow="Testimonials"
           title={testimonials.title}
           align="left"
         />

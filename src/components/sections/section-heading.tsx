@@ -17,64 +17,62 @@ export function Accented({ text }: { text: string }) {
   );
 }
 
-/** Small "—→ Label" marker that sits above a section title. */
-export function Eyebrow({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <p
-      className={cn(
-        "inline-flex items-center gap-2.5 text-sm font-medium text-primary",
-        className,
-      )}
-    >
-      <span aria-hidden="true" className="flex items-center">
-        <span className="size-2 rounded-full bg-primary" />
-        <span className="h-px w-6 bg-primary" />
-      </span>
-      {children}
-    </p>
-  );
-}
+/** Section-title type scale, shared by headings that don't use <SectionHeading>. */
+export const sectionTitle =
+  "text-[2.1rem] leading-[1.04] font-semibold tracking-[-0.03em] text-balance sm:text-5xl lg:text-[3.4rem]";
 
+/**
+ * Section opener. "split" (the default) puts the title on the left and the
+ * supporting paragraph on the right, bottom-aligned, as one row; it stacks on
+ * phones. "left" and "center" stack the paragraph under the title.
+ * `action` (a link or button) sits under the paragraph.
+ */
 export function SectionHeading({
   id,
-  eyebrow,
   title,
   description,
-  align = "center",
+  action,
+  align = "split",
   className,
 }: {
   id?: string;
-  eyebrow?: string;
   title: string;
   description?: string;
-  align?: "center" | "left";
+  action?: React.ReactNode;
+  align?: "split" | "left" | "center";
   className?: string;
 }) {
+  const split = align === "split" && (description || action);
+
   return (
     <div
       className={cn(
-        "max-w-3xl",
-        align === "center" ? "mx-auto text-center" : "text-left",
+        split
+          ? "mx-auto grid max-w-7xl gap-5 md:grid-cols-[1.15fr_1fr] md:items-end md:gap-16"
+          : align === "center"
+            ? "mx-auto max-w-3xl text-center"
+            : "max-w-3xl",
+        !split && align === "split" && "mx-auto max-w-7xl",
         className,
       )}
     >
-      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <h2
-        id={id}
-        className="mt-3 text-3xl leading-[1.1] font-semibold text-balance sm:text-4xl md:text-5xl"
-      >
+      <h2 id={id} className={cn(sectionTitle, split && "max-w-[16ch]")}>
         <Accented text={title} />
       </h2>
-      {description && (
-        <p className="mt-4 text-base text-pretty text-muted-foreground md:text-lg">
-          {description}
-        </p>
+      {(description || action) && (
+        <div className={cn(!split && "mt-5", split && "md:pb-1.5")}>
+          {description && (
+            <p
+              className={cn(
+                "text-base text-pretty text-muted-foreground md:text-lg",
+                align === "center" ? "mx-auto max-w-2xl" : "max-w-md",
+              )}
+            >
+              {description}
+            </p>
+          )}
+          {action && <div className={cn(description && "mt-6", align === "center" && "flex justify-center")}>{action}</div>}
+        </div>
       )}
     </div>
   );

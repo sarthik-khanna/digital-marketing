@@ -4,36 +4,32 @@ import { cn } from "@/lib/utils";
 import { Accented } from "./section-heading";
 
 /**
- * Hero for inner pages: breadcrumb, accented title, and optional actions.
- * Pure server markup with a static CSS grid and glow.
+ * Hero for inner pages: breadcrumb, a large left-aligned title, then the
+ * description and any actions on one row beneath. Pure server markup.
  */
 export function PageHero({
-  eyebrow,
+  crumb,
   title,
   description,
   children,
   className,
 }: {
-  eyebrow: string;
+  /** Current page name in the breadcrumb. */
+  crumb: string;
   title: string;
   description: string;
   children?: React.ReactNode;
   className?: string;
 }) {
   return (
-    <section
-      className={cn(
-        "relative isolate overflow-hidden px-4 pt-36 pb-16 text-center md:pt-44 md:pb-20",
-        className,
-      )}
-    >
+    <section className={cn("relative isolate overflow-hidden px-4 pt-36 pb-16 md:pt-44 md:pb-20", className)}>
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-grid" />
       <div
         aria-hidden="true"
-        className="absolute -top-56 left-1/2 -z-10 size-[44rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl"
+        className="absolute -top-56 right-[-10%] -z-10 size-[40rem] rounded-full bg-primary/12 blur-3xl"
       />
-      <div className="mx-auto max-w-4xl">
-        <nav aria-label="Breadcrumb" className="flex justify-center">
+      <div className="mx-auto max-w-7xl">
+        <nav aria-label="Breadcrumb">
           <ol className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-4 py-1.5 text-sm shadow-sm">
             <li>
               <Link href="/" className="text-muted-foreground transition-colors hover:text-foreground">
@@ -44,21 +40,17 @@ export function PageHero({
               <IconChevronRight className="size-3.5 text-muted-foreground" />
             </li>
             <li aria-current="page" className="font-medium text-primary">
-              {eyebrow}
+              {crumb}
             </li>
           </ol>
         </nav>
-        <h1 className="mt-6 text-4xl leading-[1.05] font-semibold text-balance sm:text-5xl md:text-7xl">
+        <h1 className="mt-7 max-w-5xl text-[2.6rem] leading-[1.02] font-semibold tracking-[-0.035em] text-balance sm:text-6xl lg:text-7xl">
           <Accented text={title} />
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-pretty text-muted-foreground md:text-xl">
-          {description}
-        </p>
-        {children && (
-          <div className="mt-10 flex flex-col items-center justify-center gap-x-6 gap-y-4 sm:flex-row">
-            {children}
-          </div>
-        )}
+        <div className="mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <p className="max-w-xl text-lg text-pretty text-muted-foreground">{description}</p>
+          {children && <div className="flex shrink-0 flex-wrap items-center gap-x-6 gap-y-4">{children}</div>}
+        </div>
       </div>
     </section>
   );

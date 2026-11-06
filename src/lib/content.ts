@@ -46,6 +46,78 @@ export const intro = {
   cta: { label: "About us", href: "/about" },
 };
 
+export type GrowthCardId = "performance" | "seo" | "meta" | "ppc" | "content" | "analytics" | "strategy";
+
+export type GrowthCard = {
+  id: GrowthCardId;
+  /** Small pill above the title (the two large cards only). */
+  label?: string;
+  title: string;
+  description: string;
+  points: string[];
+  cta: { label: string; href: string };
+};
+
+/**
+ * Home "grow your business" grid, in display order. The four core services
+ * link to their pages; content, analytics and strategy link to the page that
+ * covers that work (Meta Ads creative, Performance Marketing CRO and
+ * analytics, and a strategy call on Contact).
+ */
+export const growthCards: GrowthCard[] = [
+  {
+    id: "performance",
+    label: "Digital growth agency",
+    title: "Performance Marketing",
+    description: "Data-led campaigns that bring more leads, sales and return on spend for your business.",
+    points: ["Lead generation", "ROAS optimisation", "Growth at scale"],
+    cta: { label: "Explore performance", href: "/performance-marketing" },
+  },
+  {
+    id: "seo",
+    label: "SEO (Search engine optimisation)",
+    title: "SEO",
+    description: "Rank higher, get found on Google and build steady organic traffic.",
+    points: ["Technical SEO", "Keyword strategy", "On-page and off-page SEO"],
+    cta: { label: "Explore SEO", href: "/seo" },
+  },
+  {
+    id: "meta",
+    title: "Meta Ads",
+    description: "Facebook and Instagram campaigns that reach the right audience and bring in leads.",
+    points: ["Audience targeting", "Creative testing", "Lead and sales campaigns"],
+    cta: { label: "Explore Meta Ads", href: "/meta-ads" },
+  },
+  {
+    id: "ppc",
+    title: "PPC (Google Ads)",
+    description: "Intent-driven ads that bring quality leads at a lower cost.",
+    points: ["Search campaigns", "Display ads", "Remarketing"],
+    cta: { label: "Explore PPC", href: "/ppc" },
+  },
+  {
+    id: "content",
+    title: "Content & Creative",
+    description: "Scroll-stopping ad creative and conversion-focused content for every platform.",
+    points: ["Ad creatives", "Videos and Reels", "Landing page content"],
+    cta: { label: "Explore creative", href: "/meta-ads" },
+  },
+  {
+    id: "analytics",
+    title: "Analytics & Conversion",
+    description: "Track what matters, find the gaps and turn more visitors into customers.",
+    points: ["Conversion funnel", "A/B testing", "Performance reports"],
+    cta: { label: "Explore analytics", href: "/performance-marketing" },
+  },
+  {
+    id: "strategy",
+    title: "Strategy & Growth",
+    description: "A marketing plan built around your goals, budget and stage of growth.",
+    points: ["Channel strategy", "Campaign planning", "ROI and performance analysis"],
+    cta: { label: "Plan your strategy", href: "/contact" },
+  },
+];
+
 /** Client names for the logo strip. Add only with the client's permission. */
 export const clients: string[] = [];
 
@@ -90,30 +162,49 @@ export const howWeWork = {
   steps: [
     {
       title: "Discover",
-      body: "We audit your website, ad accounts and competitors, and agree the goals and numbers we will be measured on.",
-      points: ["Website and analytics audit", "Audience and competitor research", "Goals and KPIs agreed"],
+      icon: "discover",
+      body: "Find the opportunities, problems and growth levers that matter most.",
+      points: ["Website & analytics audit", "Competitor research", "Goals & KPI definition"],
+      outcome: "Growth Audit",
     },
     {
       title: "Strategy",
-      body: "A 90-day plan covering which channels, which messages and how much budget, with the reasoning shown.",
-      points: ["Channel mix and budget", "Messaging and offer plan", "Tracking set up before launch"],
+      icon: "strategy",
+      body: "Build a focused growth plan around the right audience, channels and messaging.",
+      points: ["Channel strategy", "Audience & messaging", "Budget allocation"],
+      outcome: "90-Day Growth Plan",
     },
     {
       title: "Launch",
-      body: "Campaigns, content and landing pages go live in weeks, not months.",
-      points: ["Ad creative and copy", "Tracking checks", "Staged budget ramp-up"],
+      icon: "launch",
+      body: "Turn the strategy into campaigns, content and landing experiences that go live quickly.",
+      points: ["Campaign setup", "Creative & copy", "Tracking implementation"],
+      outcome: "Campaign Launch",
     },
     {
       title: "Optimise",
-      body: "Weekly testing and a monthly review replace guesswork. Weak ads are paused and budget moves to what works.",
-      points: ["Weekly tests", "Monthly performance review", "Plain-language reports"],
+      icon: "optimise",
+      body: "Use real performance data to improve campaigns, reduce waste and increase conversions.",
+      points: ["A/B testing", "Weekly optimisation", "Performance reporting"],
+      outcome: "Performance Insights",
     },
     {
       title: "Scale",
-      body: "Once results hold, we widen audiences, add channels and raise budgets against a clear target.",
-      points: ["New channels and locations", "Budget scaling rules", "Quarterly roadmap"],
+      icon: "scale",
+      body: "Double down on what works and expand the channels, audiences and budgets that drive results.",
+      points: ["Channel expansion", "Budget scaling", "Growth roadmap"],
+      outcome: "Scaling Roadmap",
     },
-  ],
+  ] satisfies ProcessStep[],
+};
+
+export type ProcessStep = {
+  title: string;
+  body: string;
+  points?: string[];
+  /** What the client has in hand at the end of the stage. */
+  outcome?: string;
+  icon?: "discover" | "strategy" | "launch" | "optimise" | "scale";
 };
 
 export type WorkItem = {

@@ -17,12 +17,12 @@ const unsplash = (id: string) =>
   `https://images.unsplash.com/photo-${id}?auto=format&w=1600&q=80`;
 
 export const photos = {
-  // Project asset (transparent cutout), not a stock photo.
+  // Project asset: the marketer cut out of the scene (transparent), not a stock photo.
   heroCharacter: {
-    src: "/images/hero-character.webp",
-    alt: "Illustrated marketer holding a laptop and pointing at an SEO growth chart",
-    width: 1284,
-    height: 1225,
+    src: "/images/hero-marketer-cutout.webp",
+    alt: "Illustrated digital marketer smiling at his laptop with a coffee mug",
+    width: 975,
+    height: 865,
   },
   introTeam: {
     src: unsplash("1600880292203-757bb62b4baf"),
@@ -35,6 +35,11 @@ export const photos = {
   strategy: {
     src: unsplash("1552664730-d307ca884978"),
     alt: "Strategist mapping a campaign plan on a wall of sticky notes",
+  },
+  /** Product shot inside the Meta Ads phone illustration on the home page. */
+  productShoe: {
+    src: unsplash("1542291026-7eec264c27ff"),
+    alt: "Red sneaker product photo",
   },
   contact: {
     src: unsplash("1522071820081-009f0129c71c"),

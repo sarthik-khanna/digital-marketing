@@ -19,6 +19,11 @@ const variants = {
     button: "bg-highlight text-highlight-foreground hover:bg-highlight/90",
     chip: "bg-ink text-ink-foreground",
   },
+  /** White pill for navy panels. */
+  light: {
+    button: "bg-card text-foreground hover:bg-card/90",
+    chip: "bg-primary text-primary-foreground",
+  },
 } as const;
 
 /**

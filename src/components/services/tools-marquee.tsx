@@ -48,7 +48,7 @@ export function ToolsMarquee({ service }: { service: Service }) {
     <section aria-labelledby="tools-title" className="py-16">
       <SectionHeading
         id="tools-title"
-        eyebrow="Our toolkit"
+       
         title="Platforms we *work in*"
         className="px-4"
       />

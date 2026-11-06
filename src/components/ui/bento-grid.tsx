@@ -30,15 +30,15 @@ export function BentoGridItem({
   return (
     <li
       className={cn(
-        "group/bento row-span-1 flex flex-col justify-between gap-4 rounded-3xl border border-border bg-card p-6 transition duration-200 hover:border-primary/30 hover:shadow-[0_24px_50px_-30px_oklch(0.505_0.265_263/0.45)]",
+        "group/bento row-span-1 flex flex-col justify-between gap-8 rounded-[1.75rem] border border-border bg-card p-7 transition duration-200 hover:border-primary/30 hover:shadow-[0_24px_50px_-30px_oklch(0.505_0.265_263/0.45)]",
         className,
       )}
     >
       {header}
+      {icon}
       <div className="transition duration-200 group-hover/bento:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover/bento:translate-x-0">
-        {icon}
-        <h3 className="mt-4 text-lg font-semibold">{title}</h3>
-        <p className="mt-2 text-sm text-pretty text-muted-foreground">{description}</p>
+        <h3 className="text-xl font-semibold tracking-[-0.01em] text-balance">{title}</h3>
+        <p className="mt-2 max-w-md text-sm text-pretty text-muted-foreground">{description}</p>
       </div>
     </li>
   );

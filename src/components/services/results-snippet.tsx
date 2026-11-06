@@ -10,7 +10,7 @@ export function ResultsSnippet({ service }: { service: Service }) {
 
   return (
     <section aria-labelledby="results-title" className="px-4 py-20">
-      <SectionHeading id="results-title" eyebrow="Results" title="Results we can *point to*" />
+      <SectionHeading id="results-title" title="Results we can *point to*" />
       <ul className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-2">
         {service.results.map((item) => (
           <li key={item.client} className="rounded-3xl bg-ink p-8 text-ink-foreground">

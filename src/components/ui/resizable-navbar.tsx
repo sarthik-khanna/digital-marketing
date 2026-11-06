@@ -10,7 +10,7 @@ import {
 } from "motion/react";
 import * as m from "motion/react-m";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 
 interface NavbarProps {
@@ -75,6 +75,15 @@ export const Navbar = ({ children, className }: NavbarProps) => {
       // IMPORTANT: Change this to class of `fixed` if you want the navbar to be fixed
       className={cn("sticky inset-x-0 top-20 z-40 w-full", className)}
     >
+      {/* Frosted mask behind the full-width bar at the top of the page; the
+          pill that appears on scroll has its own background, so it fades out. */}
+      <div
+        aria-hidden="true"
+        className={cn(
+          "pointer-events-none fixed inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-background via-background/75 to-transparent backdrop-blur-md transition-opacity duration-300 [mask-image:linear-gradient(to_bottom,black_45%,transparent)] motion-reduce:transition-none",
+          visible ? "opacity-0" : "opacity-100",
+        )}
+      />
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
           ? React.cloneElement(
@@ -208,6 +217,16 @@ export const MobileNavMenu = ({
   isOpen,
   onClose,
 }: MobileNavMenuProps) => {
+  // Escape closes the open menu, as keyboard users expect.
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isOpen, onClose]);
+
   return (
     <AnimatePresence>
       {isOpen && (

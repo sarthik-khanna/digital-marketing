@@ -1,6 +1,9 @@
-// Creates the tables in Neon and any admins listed in ADMIN_EMAILS that don't exist yet.
+// Creates the tables in Neon, the starter blog articles, and any admins listed in
+// ADMIN_EMAILS that don't exist yet.
 // Safe to re-run. Usage: npm run db:setup   (reads .env.local)
 import { neon } from "@neondatabase/serverless";
+import { seedPosts } from "../src/lib/blog-seed.ts";
+import { unsplashImage } from "../src/lib/cover-image.ts";
 import { generatePassword, hashPassword } from "../src/lib/password.ts";
 
 const url = process.env.DATABASE_URL;
@@ -64,10 +67,40 @@ const schema = [
     expires_at timestamptz not null,
     used_at timestamptz
   )`,
+  `create table if not exists blog_posts (
+    id bigint generated always as identity primary key,
+    slug text not null unique,
+    title text not null,
+    excerpt text not null,
+    category text not null,
+    content text not null,
+    author text not null default 'Tech Digital Marketer team',
+    cover_image text,
+    published boolean not null default false,
+    published_at timestamptz,
+    created_at timestamptz not null default now(),
+    updated_at timestamptz not null default now()
+  )`,
+  `create index if not exists blog_posts_published_idx on blog_posts (published, published_at desc)`,
+  // Added after the first release; harmless when the column already exists.
+  `alter table blog_posts add column if not exists cover_image text`,
 ];
 
 for (const statement of schema) await sql.query(statement);
-console.log("Tables ready: leads, callback_requests, audit_requests, admins, admin_sessions, password_resets");
+console.log("Tables ready: leads, callback_requests, audit_requests, admins, admin_sessions, password_resets, blog_posts");
+
+// Starter articles: inserted once, matched by slug, never overwritten (edit them at /admin/blog).
+let seeded = 0;
+for (const post of seedPosts) {
+  const rows = await sql`
+    insert into blog_posts (slug, title, excerpt, category, content, cover_image, published, published_at, updated_at)
+    values (${post.slug}, ${post.title}, ${post.excerpt}, ${post.category}, ${post.content}, ${unsplashImage(post.cover)}, true, ${post.publishedAt}, ${post.publishedAt})
+    on conflict (slug) do nothing
+    returning id
+  `;
+  seeded += rows.length;
+}
+console.log(`Blog: ${seeded} starter article(s) added, ${seedPosts.length - seeded} already present.`);
 
 const emails = (process.env.ADMIN_EMAILS ?? "")
   .split(",")

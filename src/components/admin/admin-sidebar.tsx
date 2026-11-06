@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ClipboardCheckIcon, ExternalLinkIcon, InboxIcon, LogOutIcon, PhoneCallIcon } from "lucide-react";
+import { ClipboardCheckIcon, ExternalLinkIcon, InboxIcon, LogOutIcon, NewspaperIcon, PhoneCallIcon } from "lucide-react";
 import { logout } from "@/app/admin/actions";
 import {
   Sidebar,
@@ -76,6 +76,24 @@ export function AdminSidebar({ account }: { account: React.ReactNode }) {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Content</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  render={<Link href="/admin/blog" onClick={close} />}
+                  isActive={pathname.startsWith("/admin/blog")}
+                  tooltip="Blog posts"
+                >
+                  <NewspaperIcon />
+                  <span>Blog posts</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

@@ -45,7 +45,7 @@ export function Packages({ service }: { service: Service }) {
     <section aria-labelledby="packages-title" className="px-4 py-20">
       <SectionHeading
         id="packages-title"
-        eyebrow="Packages"
+       
         title={`${service.title} plans that *grow* with you`}
         description="Every plan includes tracking set-up, a dedicated account manager and accounts in your name."
       />

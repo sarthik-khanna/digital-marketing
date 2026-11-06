@@ -14,7 +14,6 @@ export function Work() {
   return (
     <section id="work" className="scroll-mt-24 px-4 py-24">
       <SectionHeading
-        eyebrow="Case studies"
         title={work.title}
         description={work.description}
       />

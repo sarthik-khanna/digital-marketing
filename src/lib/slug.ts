@@ -1,0 +1,12 @@
+/** "Local SEO: a checklist!" -> "local-seo-a-checklist". Used for blog URLs. */
+export function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/['’]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80)
+    .replace(/-+$/g, "");
+}

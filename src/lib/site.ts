@@ -9,20 +9,26 @@ export const site = {
   tagline: "SEO, Google Ads & Meta Ads Agency in India",
   description:
     "Tech Digital Marketer is a digital marketing agency for growing Indian businesses: SEO, Google Ads, performance marketing and Meta ads, measured on enquiries and sales.",
-  /** Set NEXT_PUBLIC_SITE_URL in production; used for the sitemap and canonical URLs. */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://techdigitalmarketer.com",
+  /**
+   * The live address, used for the sitemap, robots.txt, canonical URLs and
+   * password reset links. Vercel serves the site on www and 308-redirects the
+   * bare domain to it, so this must be the www form: canonical and sitemap URLs
+   * must not redirect. Not read from an env var, so a stale value can't break SEO.
+   */
+  url: "https://www.techdigitalmarketer.com",
   /** Wordmark shown in the navbar. The favicon lives in src/app (icon.png, apple-icon.png, favicon.ico). */
   logo: { src: "/brand/tdm-logo.png", width: 238, height: 160 },
-  // TODO: real contact details. Empty values are hidden on the site.
-  email: "" as string,
+  // TODO: real phone and address. Empty values are hidden on the site.
+  email: "seo@techdigitalmarketer.com" as string,
   phone: "" as string,
   address: "" as string,
+  /** The logo links home, so the menu leads with the four services. */
   nav: [
-    { name: "Home", link: "/" },
     { name: "SEO", link: "/seo" },
     { name: "PPC", link: "/ppc" },
     { name: "Performance", link: "/performance-marketing" },
     { name: "Meta Ads", link: "/meta-ads" },
+    { name: "Blog", link: "/blog" },
     { name: "About", link: "/about" },
   ],
   cta: { name: "Contact us", link: "/contact" },
@@ -39,4 +45,5 @@ export const routes = [
   "/meta-ads",
   "/about",
   "/contact",
+  "/blog",
 ] as const;

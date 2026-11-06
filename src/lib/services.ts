@@ -38,7 +38,7 @@ import {
   MonitorPlay,
   type LucideIcon,
 } from "lucide-react";
-import type { Faq, Stat } from "@/lib/content";
+import type { Faq } from "@/lib/content";
 
 export type ServiceId = "seo" | "ppc" | "performance" | "meta";
 
@@ -101,8 +101,6 @@ export type Service = {
   results: CaseStudy[];
   faqs: Faq[];
   related: ServiceId[];
-  /** Commitment figures (legacy service page, until every page uses the new template). */
-  stats: Stat[];
 };
 
 export const services: Service[] = [
@@ -119,9 +117,9 @@ export const services: Service[] = [
     metaDescription:
       "Technical SEO, content, local SEO and link building for Indian businesses. Tech Digital Marketer grows organic traffic that turns into enquiries and sales.",
     eyebrow: "Search engine optimisation",
-    h1: "SEO that brings in *customers*, not just traffic",
+    h1: "Show up where your customers *search*",
     subtitle:
-      "Technical fixes, search-led content, local SEO and authority building, focused on the pages that bring in enquiries and sales, with clear monthly reporting.",
+      "SEO for Indian businesses across Google search, Maps and AI answers, measured on the calls, forms and WhatsApp enquiries it brings in.",
     outcomes: [
       "Rank for the searches your customers actually make",
       "Turn organic visitors into calls, forms and WhatsApp enquiries",
@@ -220,11 +218,6 @@ export const services: Service[] = [
       { question: "What happens if we stop working together?", answer: "You keep everything: the content, the improvements, your Search Console and Analytics data. Rankings built on a sound site and good content do not disappear when we leave." },
     ],
     related: ["ppc", "performance", "meta"],
-    stats: [
-      { value: "30 days", label: "To your full technical audit and SEO roadmap" },
-      { value: "Monthly", label: "Report on rankings, traffic and leads" },
-      { value: "100%", label: "Of content approved by you before it goes live" },
-    ],
   },
   {
     id: "ppc",
@@ -300,11 +293,6 @@ export const services: Service[] = [
       { question: "Do you also build landing pages?", answer: "We recommend changes to your existing pages and can design dedicated landing pages when the current site is holding conversions back." },
     ],
     related: ["seo", "performance", "meta"],
-    stats: [
-      { value: "Week 1", label: "Tracking set-up and account audit" },
-      { value: "Weekly", label: "Search-term, bid and budget reviews" },
-      { value: "100%", label: "Ad account and data owned by you" },
-    ],
   },
   {
     id: "performance",
@@ -380,11 +368,6 @@ export const services: Service[] = [
       { question: "Do you need access to our CRM or store?", answer: "Read access helps us measure real customers and revenue. We work with Shopify, WooCommerce, HubSpot, Zoho and most CRMs, and only request the access we need." },
     ],
     related: ["ppc", "meta", "seo"],
-    stats: [
-      { value: "1 plan", label: "Across search, social, email and WhatsApp" },
-      { value: "Weekly", label: "Creative, audience and landing page tests" },
-      { value: "Monthly", label: "Review of CAC, ROAS and payback" },
-    ],
   },
   {
     id: "meta",
@@ -460,11 +443,6 @@ export const services: Service[] = [
       { question: "Do we need to post regularly on our page?", answer: "It helps credibility, but ads do the heavy lifting. A page with a few recent, genuine posts is enough for most businesses to start." },
     ],
     related: ["performance", "ppc", "seo"],
-    stats: [
-      { value: "CAPI", label: "Server-side tracking alongside the Meta Pixel" },
-      { value: "Monthly", label: "Fresh ad creatives tested" },
-      { value: "Weekly", label: "Read-out of what won and what is next" },
-    ],
   },
 ];
 
@@ -497,33 +475,9 @@ export const comparison: { aspect: string; us: string; typical: string }[] = [
 /** Decorative icons for the step visuals in the Process section. */
 export const stepIcons: LucideIcon[] = [Search, Workflow, Megaphone, Repeat];
 
-/** Extra content for sections that only the SEO page has. */
+/** Extra content for sections that only the SEO page has (more in seo-page.ts). */
 export const seoExtras = {
-  /** Free audit form: what the visitor gets. */
-  auditIncludes: [
-    "Technical health check: indexing, speed and Core Web Vitals",
-    "Top keyword opportunities you are missing",
-    "How you compare with two local competitors",
-    "A prioritised list of quick wins",
-  ],
-  /**
-   * Illustration of how organic traffic typically compounds once fixes and
-   * content are in place. Sample data only, labelled as such on the page.
-   */
-  trafficSample: [
-    { month: "Month 1", sessions: 1200 },
-    { month: "Month 2", sessions: 1260 },
-    { month: "Month 3", sessions: 1400 },
-    { month: "Month 4", sessions: 1650 },
-    { month: "Month 5", sessions: 1980 },
-    { month: "Month 6", sessions: 2350 },
-    { month: "Month 7", sessions: 2800 },
-    { month: "Month 8", sessions: 3250 },
-    { month: "Month 9", sessions: 3700 },
-    { month: "Month 10", sessions: 4250 },
-    { month: "Month 11", sessions: 4800 },
-    { month: "Month 12", sessions: 5400 },
-  ],
+  /** The self-check on the SEO page: the checks every audit starts with. */
   checklist: [
     {
       group: "Technical",

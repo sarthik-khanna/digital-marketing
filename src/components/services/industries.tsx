@@ -7,7 +7,7 @@ export function Industries() {
     <section aria-labelledby="industries-title" className="px-4 py-20">
       <SectionHeading
         id="industries-title"
-        eyebrow="Industries"
+       
         title="Built for how *your industry* sells"
       />
       <HoverEffect

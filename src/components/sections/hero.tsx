@@ -2,8 +2,15 @@ import { IconCircleCheckFilled } from "@tabler/icons-react";
 import { ArrowLink } from "@/components/arrow-link";
 import { Sparkle } from "@/components/sparkle";
 import { hero } from "@/lib/content";
+import { CanvasText } from "@/components/ui/canvas-text";
 import { HeroVisual } from "./hero-visual";
-import { Accented } from "./section-heading";
+
+// The *starred* phrase in the headline gets the Aceternity canvas-text effect:
+// royal-blue letters with lighter blue lines waving through them.
+const [before, accent, after] = hero.headline.split("*");
+const lineColors = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1].map(
+  (alpha) => `rgba(110, 160, 255, ${alpha})`,
+);
 
 export function Hero() {
   return (
@@ -30,7 +37,15 @@ export function Hero() {
           </p>
 
           <h1 className="mt-6 text-5xl leading-[1.02] font-semibold text-balance sm:text-6xl xl:text-7xl">
-            <Accented text={hero.headline} />
+            {before}
+            <CanvasText
+              text={accent}
+              backgroundClassName="bg-primary"
+              colors={lineColors}
+              lineGap={4}
+              animationDuration={20}
+            />
+            {after}
           </h1>
 
           <p className="mt-6 max-w-xl text-lg text-pretty text-muted-foreground">

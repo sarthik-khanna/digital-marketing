@@ -10,7 +10,7 @@ export function SubServices({ service }: { service: Service }) {
     <section aria-labelledby="specialisms-title" className="px-4 py-20">
       <SectionHeading
         id="specialisms-title"
-        eyebrow="Specialisms"
+       
         title={`${service.title}, *tailored* to how you sell`}
       />
       <Tabs defaultValue={first.id} className="mx-auto mt-12 max-w-5xl gap-6">

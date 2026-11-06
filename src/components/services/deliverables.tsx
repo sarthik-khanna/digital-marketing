@@ -11,7 +11,7 @@ export function Deliverables({ service }: { service: Service }) {
     <section id="included" aria-labelledby="included-title" className="scroll-mt-24 px-4 py-20">
       <SectionHeading
         id="included-title"
-        eyebrow="What's included"
+       
         title={`Everything in our ${service.title} *service*`}
       />
       <BentoGrid className="mt-12">

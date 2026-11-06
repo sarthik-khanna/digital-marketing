@@ -1,97 +1,66 @@
 import Image from "next/image";
-import { IconSpeakerphone, IconTrendingUp } from "@tabler/icons-react";
+import { IconCheck, IconSpeakerphone } from "@tabler/icons-react";
 import { photos } from "@/lib/images";
 import { cn } from "@/lib/utils";
 
 /**
- * Hero artwork: the illustrated marketer cutout standing on a soft blue
- * disc, with a few dashboard cards floating in the empty space around it (new
- * leads, revenue, ROAS, rankings). Phones get only two cards so the
- * character stays visible. Cards are decorative and aria-hidden, and say what
- * we track rather than claiming results.
+ * Hero artwork: the illustrated marketer (cut out of the original scene) on a
+ * soft disc, with the scene's side badges rebuilt in markup so they stay sharp
+ * and on-brand: megaphone, ROI chart, "Digital Marketing" growth card, target,
+ * and the services checklist. Static (no floating motion), decorative and
+ * aria-hidden. The ROI card shows a trend, not a claimed figure.
  */
 
-const card =
-  "absolute rounded-2xl bg-card shadow-[0_24px_50px_-20px_oklch(0.19_0.06_264/0.4)]";
+const glass =
+  "absolute rounded-2xl border border-white/60 bg-card/85 shadow-[0_24px_50px_-24px_oklch(0.19_0.06_264/0.45)] backdrop-blur-md";
 
-function LeadToast() {
+function Bars({ heights, className }: { heights: number[]; className?: string }) {
   return (
-    <div className="absolute top-[3%] left-0 flex animate-float items-center gap-2 rounded-full bg-ink px-3 py-2 text-[0.7rem] font-medium text-ink-foreground shadow-lg sm:text-xs">
-      <span className="relative flex size-2">
-        <span className="absolute inset-0 animate-ping rounded-full bg-highlight motion-reduce:hidden" />
-        <span className="relative size-2 rounded-full bg-highlight" />
-      </span>
-      New lead, 2 min ago
-    </div>
-  );
-}
-
-function RevenueCard() {
-  const line = "M0,40 C20,38 30,30 50,32 S80,22 100,18 S130,8 150,4";
-  return (
-    <div className={cn(card, "bottom-[10%] left-0 hidden w-[34%] animate-float p-3 sm:block [animation-delay:-3s] sm:p-3.5")}>
-      <p className="text-[0.6rem] text-muted-foreground sm:text-[0.65rem]">Revenue from ads</p>
-      <p className="mt-0.5 flex flex-wrap items-baseline gap-1.5">
-        <span className="font-heading text-sm sm:text-base">Tracked to the sale</span>
-        <span className="rounded-full bg-highlight px-1.5 text-[0.6rem] font-semibold text-highlight-foreground">
-          Live
-        </span>
-      </p>
-      <svg viewBox="0 0 150 46" preserveAspectRatio="none" className="mt-2 h-8 w-full sm:h-10">
-        <path d={`${line} L150,46 L0,46 Z`} className="fill-primary/15" />
-        <path
-          d={line}
-          fill="none"
-          stroke="var(--primary)"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          vectorEffect="non-scaling-stroke"
+    <div className={cn("flex items-end gap-1", className)}>
+      {heights.map((height, i) => (
+        <span
+          key={i}
+          style={{ height: `${height}%` }}
+          className="flex-1 rounded-t-sm bg-gradient-to-t from-primary/70 to-[oklch(0.74_0.14_255)]"
         />
-      </svg>
+      ))}
     </div>
   );
 }
 
-function RoasDial() {
+function TrendArrow({ className }: { className?: string }) {
   return (
-    <div className={cn(card, "right-[2%] bottom-[36%] flex animate-float items-center gap-2.5 p-2.5 pr-3.5 [animation-delay:-1.5s]")}>
-      <div className="relative size-10 shrink-0 rounded-full bg-[conic-gradient(var(--primary)_0_72%,var(--secondary)_72%_100%)] sm:size-11">
-        <span className="absolute inset-1.5 flex items-center justify-center rounded-full bg-card text-[0.55rem] font-semibold">
-          ROAS
-        </span>
-      </div>
-      <div className="text-[0.7rem] leading-tight">
-        <p className="font-semibold">Return on ad spend</p>
-        <p className="text-muted-foreground">reviewed weekly</p>
-      </div>
-    </div>
+    <svg viewBox="0 0 100 50" preserveAspectRatio="none" className={cn("pointer-events-none absolute", className)}>
+      <path d="M4,44 C30,40 52,30 70,18 L92,6" fill="none" stroke="var(--primary)" strokeWidth="3.5" strokeLinecap="round" />
+      <path d="M80,4 L94,5 L90,18" fill="none" stroke="var(--primary)" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }
 
-function RankingsChip() {
+function Target({ className }: { className?: string }) {
   return (
-    <div className={cn(card, "right-[6%] bottom-[12%] hidden items-center sm:flex gap-2 p-2.5 pr-3.5")}>
-      <span className="flex size-8 items-center justify-center rounded-xl bg-highlight text-highlight-foreground">
-        <IconTrendingUp className="size-4" />
-      </span>
-      <div className="text-[0.7rem] leading-tight">
-        <p className="font-semibold">Keyword rankings</p>
-        <p className="text-muted-foreground">reported monthly</p>
-      </div>
-    </div>
+    <svg viewBox="0 0 100 100" className={cn("absolute drop-shadow-[0_12px_20px_oklch(0.19_0.06_264/0.3)]", className)}>
+      <circle cx="46" cy="54" r="40" fill="var(--highlight)" />
+      <circle cx="46" cy="54" r="30" fill="white" />
+      <circle cx="46" cy="54" r="20" fill="var(--highlight)" />
+      <circle cx="46" cy="54" r="9" fill="white" />
+      <path d="M46,54 L90,10" stroke="var(--primary)" strokeWidth="5" strokeLinecap="round" />
+      <path d="M80,6 L94,4 L92,18" fill="none" stroke="var(--primary)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }
+
+const services = ["SEO", "Social Media", "Google Ads", "Content Marketing", "Email Marketing"];
 
 export function HeroVisual() {
   const { heroCharacter } = photos;
 
   return (
-    <div className="relative mx-auto w-full max-w-[38rem] select-none">
-      {/* Disc, ring and floor shadow behind the character. */}
+    <div className="relative mx-auto w-full max-w-[36rem] pt-20 select-none sm:pt-24">
+      {/* Disc and glow behind the character. */}
       <div aria-hidden="true">
-        <div className="absolute top-[14%] left-[10%] aspect-square w-[64%] rounded-full bg-gradient-to-b from-primary/20 to-tint-rose/40" />
-        <div className="absolute top-[8%] left-[4%] aspect-square w-[76%] rounded-full border border-dashed border-primary/25" />
-        <div className="absolute bottom-[2%] left-[32%] h-[4%] w-[26%] rounded-[50%] bg-ink/20 blur-md" />
+        <div className="absolute top-[22%] left-1/2 aspect-square w-[78%] -translate-x-1/2 rounded-full bg-gradient-to-b from-primary/25 to-tint-rose/40" />
+        <div className="absolute top-[17%] left-1/2 aspect-square w-[90%] -translate-x-1/2 rounded-full border border-dashed border-primary/25" />
       </div>
 
       <Image
@@ -100,18 +69,54 @@ export function HeroVisual() {
         width={heroCharacter.width}
         height={heroCharacter.height}
         preload
-        sizes="(min-width: 1024px) 38rem, 92vw"
-        className="relative h-auto w-full"
+        sizes="(min-width: 1024px) 34rem, 92vw"
+        className="relative mx-auto h-auto w-[94%]"
       />
 
       <div aria-hidden="true">
-        <span className="absolute top-[44%] left-[4%] hidden size-11 sm:flex animate-float items-center justify-center rounded-full bg-highlight text-highlight-foreground shadow-lg [animation-delay:-4s] sm:size-12">
-          <IconSpeakerphone className="size-5 sm:size-6" />
+        {/* Megaphone, top left. */}
+        <span className="absolute top-[6%] left-[4%] flex size-14 -rotate-12 items-center justify-center rounded-2xl bg-card text-primary shadow-[0_20px_40px_-18px_oklch(0.19_0.06_264/0.5)] sm:size-16">
+          <IconSpeakerphone className="size-8 sm:size-9" />
+          <span className="absolute -top-1 -right-1 size-3 rounded-full bg-highlight" />
         </span>
-        <LeadToast />
-        <RoasDial />
-        <RevenueCard />
-        <RankingsChip />
+
+        {/* ROI card, left. */}
+        <div className={cn(glass, "top-[30%] -left-2 w-[30%] p-3 sm:-left-6 sm:p-3.5")}>
+          <p className="font-heading text-sm sm:text-base">ROI</p>
+          <p className="text-[0.6rem] text-muted-foreground sm:text-xs">Tracked every month</p>
+          <div className="relative mt-2 h-12 sm:h-14">
+            <Bars heights={[30, 45, 40, 62, 78]} className="absolute inset-x-0 bottom-0 h-full" />
+            <TrendArrow className="inset-0 h-full w-full" />
+          </div>
+        </div>
+
+        {/* Digital Marketing growth card, top right, with the target. */}
+        <div className={cn(glass, "top-[4%] right-0 w-[46%] bg-ink/90 p-3.5 text-ink-foreground sm:p-4")}>
+          <p className="font-heading text-base leading-tight sm:text-xl">
+            Digital
+            <br />
+            Marketing
+          </p>
+          <div className="relative mt-2 h-10 sm:h-12">
+            <Bars heights={[18, 28, 34, 48, 62, 80, 100]} className="absolute right-0 bottom-0 h-full w-[70%]" />
+            <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="pointer-events-none absolute inset-0 h-full w-full">
+              <path d="M2,36 C30,34 55,26 74,14 L94,4" fill="none" stroke="oklch(0.74 0.14 255)" strokeWidth="2.5" strokeLinecap="round" />
+            </svg>
+          </div>
+        </div>
+        <Target className="-top-3 -right-3 size-14 sm:-top-6 sm:-right-6 sm:size-[4.5rem]" />
+
+        {/* Services checklist, right. */}
+        <ul className={cn(glass, "top-[36%] -right-2 hidden w-[34%] space-y-1.5 p-3 sm:block sm:-right-6")}>
+          {services.map((service) => (
+            <li key={service} className="flex items-center gap-2 text-[0.7rem] font-medium">
+              <span className="flex size-4 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                <IconCheck className="size-2.5" stroke={3} />
+              </span>
+              {service}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

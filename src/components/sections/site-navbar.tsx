@@ -25,13 +25,15 @@ export function SiteNavbar() {
   const pathname = usePathname();
   const openCallback = useCallbackDialog();
   const close = () => setOpen(false);
+  // Section match, so /blog/some-post still highlights Blog.
+  const active = items.find((item) => pathname === item.link || pathname.startsWith(`${item.link}/`))?.link;
 
   return (
     <header>
       <Navbar className="fixed top-3">
         <NavBody>
           <NavbarLogo name={site.name} logo={site.logo} />
-          <NavItems items={items} activeLink={pathname} />
+          <NavItems items={items} activeLink={active} />
           <div className="relative z-20 flex items-center gap-2">
             {openCallback && (
               <NavbarButton
@@ -68,9 +70,9 @@ export function SiteNavbar() {
                 key={item.link}
                 href={item.link}
                 onClick={close}
-                aria-current={pathname === item.link ? "page" : undefined}
+                aria-current={active === item.link ? "page" : undefined}
                 className={
-                  pathname === item.link
+                  active === item.link
                     ? "w-full text-lg text-primary"
                     : "w-full text-lg text-foreground"
                 }
