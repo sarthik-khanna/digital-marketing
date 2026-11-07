@@ -291,14 +291,14 @@ export const faq = {
         "A monthly report and review call covering enquiries, sales, cost per lead and return on ad spend, not just clicks and impressions.",
     },
     {
-      question: "What is the minimum ad budget?",
+      question: "What happens after I ask for the free audit?",
       answer:
-        "It depends on your industry and city. As a guide, we suggest at least ₹30,000 a month in ad spend so campaigns have enough data to learn. We recommend a budget after the free audit.",
+        "We reply within one working day. We review your website, ad accounts and competitors, then send clear, prioritised next steps. There is no obligation to hire us afterwards.",
     },
     {
-      question: "Do you work with businesses across India?",
+      question: "Which service should we start with?",
       answer:
-        "Yes. We work with businesses all over India, with regular calls and reports, so your location is never a barrier.",
+        "It depends on how your customers look for you. If they search with clear intent, SEO and Google Ads usually come first. Meta ads suit businesses that need to create interest with strong creative. Performance marketing ties several channels together once more than one is working. The free audit shows you where to start.",
     },
   ],
 };
