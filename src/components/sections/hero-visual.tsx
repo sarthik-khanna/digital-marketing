@@ -11,10 +11,11 @@ import { cn } from "@/lib/utils";
  * aria-hidden. The ROI card shows a trend, not a claimed figure.
  */
 
-const glass =
+/** Shared with the service-page characters (services/service-character.tsx). */
+export const glass =
   "absolute rounded-2xl border border-white/60 bg-card/85 shadow-[0_24px_50px_-24px_oklch(0.19_0.06_264/0.45)] backdrop-blur-md";
 
-function Bars({ heights, className }: { heights: number[]; className?: string }) {
+export function Bars({ heights, className }: { heights: number[]; className?: string }) {
   return (
     <div className={cn("flex items-end gap-1", className)}>
       {heights.map((height, i) => (
@@ -28,7 +29,7 @@ function Bars({ heights, className }: { heights: number[]; className?: string })
   );
 }
 
-function TrendArrow({ className }: { className?: string }) {
+export function TrendArrow({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 100 50" preserveAspectRatio="none" className={cn("pointer-events-none absolute", className)}>
       <path d="M4,44 C30,40 52,30 70,18 L92,6" fill="none" stroke="var(--primary)" strokeWidth="3.5" strokeLinecap="round" />
@@ -37,7 +38,7 @@ function TrendArrow({ className }: { className?: string }) {
   );
 }
 
-function Target({ className }: { className?: string }) {
+export function Target({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 100 100" className={cn("absolute drop-shadow-[0_12px_20px_oklch(0.19_0.06_264/0.3)]", className)}>
       <circle cx="46" cy="54" r="40" fill="var(--highlight)" />

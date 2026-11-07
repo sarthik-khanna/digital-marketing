@@ -1,10 +1,10 @@
-import { ArrowLink } from "@/components/arrow-link";
+import { BookCallButton } from "@/components/services/book-call-button";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { faq as defaultFaq, type Faq as FaqItem } from "@/lib/content";
 import { site } from "@/lib/site";
 import { Accented, sectionTitle } from "./section-heading";
 
-/** Questions on the right, the title and a "still have a question" card pinned on the left. */
+/** Questions on the right, the title and a "still have a question" card (call-back button) pinned on the left. */
 export function Faq({
   items = defaultFaq.items,
   title = defaultFaq.title,
@@ -37,9 +37,8 @@ export function Faq({
                 "Send us your question through the contact form and we will reply within one working day."
               )}
             </p>
-            <ArrowLink href="/contact" className="mt-6">
-              Book a call
-            </ArrowLink>
+            {/* Opens the shared "Request a call back" form, on every page including /contact. */}
+            <BookCallButton className="mt-6">Book a call</BookCallButton>
           </div>
         </div>
         <FaqAccordion items={items} />

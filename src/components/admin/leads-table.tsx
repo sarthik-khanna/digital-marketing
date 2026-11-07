@@ -1,4 +1,8 @@
+import Link from "next/link";
+import { IconFileInvoice } from "@tabler/icons-react";
 import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import {
   Table,
   TableBody,
@@ -10,6 +14,18 @@ import {
 import type { Lead } from "@/lib/db";
 import { received } from "./list-parts";
 
+/** Starts a draft invoice pre-filled from this enquiry. */
+function CreateInvoiceLink({ lead, className }: { lead: Lead; className?: string }) {
+  return (
+    <Link
+      href={`/admin/invoices/new?lead=${lead.id}`}
+      className={cn(buttonVariants({ variant: "outline", size: "sm" }), "gap-1.5 rounded-full whitespace-nowrap", className)}
+    >
+      <IconFileInvoice className="size-4" aria-hidden="true" />
+      Create invoice
+    </Link>
+  );
+}
 
 export function LeadsTable({ leads }: { leads: Lead[] }) {
   if (leads.length === 0) {
@@ -73,6 +89,7 @@ export function LeadsTable({ leads }: { leads: Lead[] }) {
             <p className="mt-3 border-t pt-3 whitespace-pre-line">
               {lead.message}
             </p>
+            <CreateInvoiceLink lead={lead} className="mt-3" />
           </li>
         ))}
       </ul>
@@ -88,6 +105,9 @@ export function LeadsTable({ leads }: { leads: Lead[] }) {
               <TableHead className="px-4">Location</TableHead>
               <TableHead className="px-4">Service</TableHead>
               <TableHead className="px-4">Message</TableHead>
+              <TableHead className="px-4">
+                <span className="sr-only">Actions</span>
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -135,6 +155,9 @@ export function LeadsTable({ leads }: { leads: Lead[] }) {
                 </TableCell>
                 <TableCell className="min-w-64 px-4 py-3 whitespace-pre-line">
                   {lead.message}
+                </TableCell>
+                <TableCell className="px-4 py-3">
+                  <CreateInvoiceLink lead={lead} />
                 </TableCell>
               </TableRow>
             ))}

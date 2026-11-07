@@ -1,10 +1,10 @@
 "use server";
 
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { createSession, destroySession } from "@/lib/admin";
 import { db } from "@/lib/db";
 import { emailConfigured, sendEmail } from "@/lib/email";
+import { origin } from "@/lib/origin";
 import { createToken, hashPassword, hashToken, verifyPassword } from "@/lib/password";
 import { site } from "@/lib/site";
 
@@ -47,14 +47,6 @@ export async function login(_previous: FormState, formData: FormData): Promise<F
 export async function logout() {
   await destroySession();
   redirect("/admin/login");
-}
-
-/** Links point at the configured site URL in production; locally they follow the request. */
-async function origin() {
-  // Trailing slash stripped so links never come out as "...com//admin/...".
-  if (process.env.NODE_ENV === "production") return site.url.replace(/\/+$/, "");
-  const request = await headers();
-  return `${request.get("x-forwarded-proto") ?? "http"}://${request.get("host")}`;
 }
 
 export async function requestPasswordReset(

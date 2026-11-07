@@ -1,69 +1,78 @@
-import Link from "next/link";
-import { IconCircleCheckFilled } from "@tabler/icons-react";
-import { Accented } from "@/components/sections/section-heading";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import { IconCheck, IconClockHour4, IconGift, IconShieldCheck, IconTrendingUp } from "@tabler/icons-react";
+import { ArrowLink } from "@/components/arrow-link";
+import { seoHero } from "@/lib/seo-page";
 import type { Service } from "@/lib/services";
-import { AuditForm } from "../audit-form";
-import { SerpVisual } from "./serp-visual";
+import { cn } from "@/lib/utils";
+import { BookCallButton } from "../book-call-button";
+import { ServiceCharacter } from "../service-character";
+import { UnderlinedHeadline } from "./underlined-headline";
+
+const statIcons = [IconGift, IconClockHour4, IconShieldCheck];
 
 /**
- * SEO hero: headline, the short free-audit form (website and email) and the
- * illustrated results page. `#free-audit` is the target of every audit link
- * on the page, including the phone CTA bar.
+ * SEO hero: badge, headline, three focus points, the audit and call CTAs and
+ * three commitments, beside the character with the SEO badges. The audit
+ * form itself is the next section (AuditBand, #free-audit).
  */
 export function SeoHero({ service }: { service: Service }) {
   return (
-    <section className="relative isolate overflow-hidden px-4 pt-32 pb-20 md:pt-40 md:pb-28">
+    <section className="relative isolate overflow-hidden px-4 pt-32 pb-24 md:pt-40 md:pb-32">
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-grid" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(55%_60%_at_85%_25%,color-mix(in_oklab,var(--primary)_14%,transparent),transparent)]"
+      />
 
-      <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[1fr_1.02fr] lg:items-center lg:gap-16">
+      <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[1fr_1.08fr] lg:items-center lg:gap-14">
         <div>
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink render={<Link href="/" />}>Home</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage className="font-medium text-primary">{service.title}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+          <p className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
+            <IconTrendingUp className="size-4" aria-hidden="true" />
+            {seoHero.badge}
+          </p>
 
-          <h1 className="mt-6 text-[2.6rem] leading-[1.02] font-semibold tracking-[-0.03em] text-balance sm:text-6xl xl:text-[4.4rem]">
-            <Accented text={service.h1} />
+          <h1 className="mt-7 text-[2.6rem] leading-[1.04] font-semibold tracking-[-0.03em] text-balance sm:text-6xl xl:text-[4.25rem]">
+            <UnderlinedHeadline text={service.h1} />
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-pretty text-muted-foreground">{service.subtitle}</p>
+          <p className="mt-7 max-w-xl text-lg text-pretty text-muted-foreground">{service.subtitle}</p>
 
-          <div
-            id="free-audit"
-            className="mt-9 max-w-xl scroll-mt-28 rounded-[1.75rem] border border-border bg-card p-5 shadow-[0_30px_70px_-45px_oklch(0.505_0.265_263/0.5)] sm:p-6"
-          >
-            <h2 className="font-heading text-lg font-semibold">Get a free SEO audit of your website</h2>
-            <p className="mt-1 mb-5 text-sm text-muted-foreground">
-              Technical health, missed keywords and two local competitors, in two working days.
-            </p>
-            <AuditForm variant="seo-audit" service={service.id} submitLabel="Send my free SEO audit" />
-          </div>
-
-          <ul className="mt-8 grid max-w-xl gap-3 text-sm font-medium sm:grid-cols-3 sm:gap-4">
-            {["No obligation", "Accounts in your name", "Plain-language reports"].map((item) => (
-              <li key={item} className="flex items-center gap-2">
-                <IconCircleCheckFilled className="size-4 shrink-0 text-primary" aria-hidden="true" />
-                {item}
+          <ul className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-[0.95rem] font-medium">
+            {seoHero.checks.map((check) => (
+              <li key={check} className="flex items-center gap-2.5">
+                <span className="flex size-6 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <IconCheck className="size-3.5" stroke={3} aria-hidden="true" />
+                </span>
+                {check}
               </li>
             ))}
           </ul>
+
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <ArrowLink href="#free-audit" className="justify-between sm:justify-start">
+              Get a free SEO audit
+            </ArrowLink>
+            <BookCallButton>Book a strategy call</BookCallButton>
+          </div>
+
+          <dl className="mt-12 grid grid-cols-3 border-t border-border pt-7">
+            {seoHero.stats.map((stat, i) => {
+              const StatIcon = statIcons[i];
+              return (
+                <div
+                  key={stat.label}
+                  className={cn("flex flex-col-reverse justify-end", i > 0 ? "border-l border-border pl-4 sm:pl-6" : "pr-4")}
+                >
+                  <dt className="mt-1 text-xs text-pretty text-muted-foreground sm:text-sm">{stat.label}</dt>
+                  <dd className="flex items-center gap-2 font-heading text-xl font-semibold whitespace-nowrap sm:text-[1.7rem]">
+                    <StatIcon className="size-5 shrink-0 text-primary sm:size-6" aria-hidden="true" />
+                    {stat.value}
+                  </dd>
+                </div>
+              );
+            })}
+          </dl>
         </div>
 
-        <SerpVisual />
+        <ServiceCharacter service={service} />
       </div>
     </section>
   );

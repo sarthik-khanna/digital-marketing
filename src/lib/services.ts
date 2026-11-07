@@ -84,6 +84,8 @@ export type Service = {
   subtitle: string;
   /** Three outcome bullets under the hero H1. */
   outcomes: string[];
+  /** What the free audit covers, listed in the audit band under the hero. */
+  auditIncludes: string[];
   painPoints: { title: string; body: string }[];
   deliverables: { title: string; body: string; icon: LucideIcon }[];
   subServices: { id: string; label: string; title: string; body: string; points: string[] }[];
@@ -124,6 +126,12 @@ export const services: Service[] = [
       "Rank for the searches your customers actually make",
       "Turn organic visitors into calls, forms and WhatsApp enquiries",
       "Monthly reports tied to leads, not just rankings",
+    ],
+    auditIncludes: [
+      "Technical health: indexing, speed and Core Web Vitals",
+      "Keywords your customers search that you are missing",
+      "How you compare with two local competitors",
+      "A prioritised list of quick wins",
     ],
     painPoints: [
       {
@@ -239,6 +247,12 @@ export const services: Service[] = [
       "Know your real cost per lead and per sale",
       "Scale budget only on campaigns that hit target",
     ],
+    auditIncludes: [
+      "Spend going to irrelevant searches",
+      "Conversion, call and WhatsApp tracking check",
+      "Campaign structure, keywords and bidding review",
+      "A prioritised list of quick fixes",
+    ],
     painPoints: [
       { title: "Spend goes up, leads do not", body: "Each month the budget rises and the cost per lead rises with it, but nobody can explain why." },
       { title: "You are paying for the wrong searches", body: "Broad match and auto-applied suggestions spend your money on searches that were never going to buy." },
@@ -314,6 +328,12 @@ export const services: Service[] = [
       "Targets for cost per customer and payback, agreed upfront",
       "Budget moves to what works, on rules you sign off",
     ],
+    auditIncludes: [
+      "Tracking and attribution check across channels",
+      "Where budget is working and where it is not",
+      "Cost per customer and payback, as far as your data shows",
+      "A prioritised list of next steps",
+    ],
     painPoints: [
       { title: "Every channel claims the same sale", body: "Google, Meta and email each report great results. Add them up and they come to more sales than you actually made." },
       { title: "Customer costs keep climbing", body: "What worked last year costs twice as much now, and nobody has a plan for what to try next." },
@@ -388,6 +408,12 @@ export const services: Service[] = [
       "Fresh creative tested every month, so ads never go stale",
       "Leads that pick up the phone, not just fill a form",
       "Tracking Meta can learn from, with Pixel and Conversions API",
+    ],
+    auditIncludes: [
+      "Pixel and Conversions API check",
+      "Creative fatigue and audience review",
+      "Lead quality and cost per lead",
+      "A prioritised list of quick wins",
     ],
     painPoints: [
       { title: "Likes, but no leads", body: "Boosted posts collect reactions and followers, and your sales team has nothing to call." },
@@ -481,18 +507,22 @@ export const seoExtras = {
   checklist: [
     {
       group: "Technical",
+      summary: "Keep your website healthy and search-friendly.",
       items: ["Pages indexed in Google Search Console", "XML sitemap and robots.txt correct", "Mobile pages pass Core Web Vitals", "HTTPS everywhere, no mixed content", "No broken links or redirect chains", "Canonical tags on duplicate pages"],
     },
     {
       group: "On-page",
+      summary: "Optimise your pages to target the right keywords.",
       items: ["One clear target keyword per page", "Unique title tag and meta description", "A single H1 and logical headings", "Descriptive image alt text", "Internal links to your money pages", "Schema markup for services and FAQs"],
     },
     {
       group: "Local",
+      summary: "Get found by customers in your area.",
       items: ["Google Business Profile complete and verified", "Same name, address and phone everywhere", "Correct categories and service areas", "Regular photos and posts on your profile", "A steady flow of genuine reviews, with replies", "A page for each branch or city you serve"],
     },
     {
       group: "Content",
+      summary: "Create useful content that ranks and converts.",
       items: ["A page for every service you sell", "Answers to the questions buyers actually ask", "Pages updated when prices or offers change", "Clear calls to action on every page", "No thin or duplicate pages", "Author and business details that build trust"],
     },
   ],

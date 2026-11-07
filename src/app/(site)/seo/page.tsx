@@ -4,8 +4,10 @@ import { LatestPosts } from "@/components/sections/latest-posts";
 import { FinalCta, MobileCtaBar } from "@/components/services/final-cta";
 import { JsonLd } from "@/components/services/json-ld";
 import { Packages } from "@/components/services/packages";
+import { AuditBand } from "@/components/services/audit-band";
 import { SeoHero } from "@/components/services/seo/seo-hero";
-import { SearchSurfaces, SeoPillars, SeoReporting, SeoTimeline } from "@/components/services/seo/seo-sections";
+import { SearchSurfaces, SeoPillars, SeoReporting } from "@/components/services/seo/seo-sections";
+import { SeoTimeline } from "@/components/services/seo/seo-timeline";
 import { SeoSelfCheck } from "@/components/services/seo/seo-self-check";
 import { serviceMetadata, structuredData } from "@/components/services/service-template";
 import { categoryForService } from "@/lib/blog-categories";
@@ -24,6 +26,7 @@ export default function SeoPage() {
   return (
     <>
       <SeoHero service={service} />
+      <AuditBand service={service} />
       <SearchSurfaces />
       <SeoPillars />
       <SeoSelfCheck />

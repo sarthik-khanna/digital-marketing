@@ -84,10 +84,44 @@ const schema = [
   `create index if not exists blog_posts_published_idx on blog_posts (published, published_at desc)`,
   // Added after the first release; harmless when the column already exists.
   `alter table blog_posts add column if not exists cover_image text`,
+  // Invoices: numbered per Indian financial year when first sent (TDM/2026-27/0001).
+  `create table if not exists invoice_counters (
+    fy text primary key,
+    last integer not null
+  )`,
+  `create table if not exists invoices (
+    id bigint generated always as identity primary key,
+    number text unique,
+    status text not null default 'draft' check (status in ('draft', 'sent', 'paid')),
+    lead_id bigint references leads (id) on delete set null,
+    client_name text not null,
+    client_email text not null,
+    client_phone text,
+    client_company text,
+    client_address text,
+    client_gstin text,
+    issue_date date,
+    due_date date,
+    due_days integer not null default 7,
+    items jsonb not null,
+    tax_rate numeric(5, 2) not null default 0,
+    notes text,
+    subtotal bigint not null,
+    tax bigint not null,
+    total bigint not null,
+    view_token_hash text unique,
+    sent_at timestamptz,
+    paid_at timestamptz,
+    created_at timestamptz not null default now(),
+    updated_at timestamptz not null default now()
+  )`,
+  `create index if not exists invoices_created_at_idx on invoices (created_at desc)`,
 ];
 
 for (const statement of schema) await sql.query(statement);
-console.log("Tables ready: leads, callback_requests, audit_requests, admins, admin_sessions, password_resets, blog_posts");
+console.log(
+  "Tables ready: leads, callback_requests, audit_requests, admins, admin_sessions, password_resets, blog_posts, invoices, invoice_counters",
+);
 
 // Starter articles: inserted once, matched by slug, never overwritten (edit them at /admin/blog).
 let seeded = 0;

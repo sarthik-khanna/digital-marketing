@@ -18,12 +18,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           }
         />
         <SidebarInset id="main">
-          <header className="sticky top-0 z-10 flex h-14 items-center gap-2 border-b bg-background/90 px-4 backdrop-blur">
+          <header className="sticky top-0 z-10 flex h-14 items-center gap-2 border-b bg-background/90 px-4 backdrop-blur print:hidden">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mx-1 h-4 data-vertical:self-center" />
             <span className="text-sm text-muted-foreground">Admin</span>
           </header>
-          <div className="flex-1 p-4 md:p-6">{children}</div>
+          <div className="flex-1 p-4 md:p-6 print:p-0">{children}</div>
         </SidebarInset>
       </SidebarProvider>
     </TooltipProvider>

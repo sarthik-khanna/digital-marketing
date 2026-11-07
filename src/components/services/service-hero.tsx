@@ -8,17 +8,17 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { MovingBorderButton } from "@/components/ui/moving-border";
 import { Spotlight } from "@/components/ui/spotlight";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import type { Service } from "@/lib/services";
-import { AuditForm } from "./audit-form";
 import { BookCallButton } from "./book-call-button";
+import { ServiceCharacter } from "./service-character";
 
 /**
- * Service page hero: breadcrumb, word-by-word H1, outcome bullets, two CTAs
- * and the free-audit lead form. One background effect (Spotlight) only.
+ * Service page hero: breadcrumb, word-by-word H1, outcome bullets and two
+ * CTAs, beside the character with this service's badges. The audit form is
+ * the next section (AuditBand, #free-audit). One background effect only.
  */
 export function ServiceHero({ service }: { service: Service }) {
   return (
@@ -67,17 +67,7 @@ export function ServiceHero({ service }: { service: Service }) {
           </div>
         </div>
 
-        <Card id="free-audit" className="scroll-mt-28 gap-6 rounded-3xl py-8 shadow-[0_30px_80px_-40px_oklch(0.505_0.265_263/0.45)] ring-border [--card-spacing:--spacing(6)] sm:[--card-spacing:--spacing(8)]">
-          <CardHeader>
-            <CardTitle className="font-heading text-2xl font-semibold">Get your free {service.title} audit</CardTitle>
-            <CardDescription className="text-base">
-              We review your current set-up and send clear, prioritised next steps. No obligation.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <AuditForm variant="hero" service={service.id} submitLabel="Get my free audit" />
-          </CardContent>
-        </Card>
+        <ServiceCharacter service={service} />
       </div>
     </section>
   );

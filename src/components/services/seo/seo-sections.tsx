@@ -7,7 +7,7 @@ import {
   type Icon,
 } from "@tabler/icons-react";
 import { SectionHeading } from "@/components/sections/section-heading";
-import { seoPillars, searchSurfaces, seoTimeline, type SurfaceId } from "@/lib/seo-page";
+import { seoPillars, searchSurfaces, type SurfaceId } from "@/lib/seo-page";
 import type { Service } from "@/lib/services";
 import { cn } from "@/lib/utils";
 
@@ -125,102 +125,6 @@ export function SeoPillars() {
           );
         })}
       </ol>
-    </section>
-  );
-}
-
-/** Builds a smooth path through the end-of-phase levels (viewBox 400 x 140). */
-function timelinePaths() {
-  const width = 400;
-  const height = 140;
-  const top = 12;
-  const y = (level: number) => height - level * (height - top);
-  const points = [{ x: 0, y: y(0.04) }, ...seoTimeline.map((phase, i) => ({ x: ((i + 1) / seoTimeline.length) * width, y: y(phase.level) }))];
-  let line = `M${points[0].x} ${points[0].y}`;
-  for (let i = 1; i < points.length; i++) {
-    const a = points[i - 1];
-    const b = points[i];
-    const mid = (a.x + b.x) / 2;
-    line += ` C${mid} ${a.y} ${mid} ${b.y} ${b.x} ${b.y}`;
-  }
-  return { line, area: `${line} L${width} ${height} L0 ${height} Z`, width, height };
-}
-
-/** Dividers between the four phases: stacked on phones, 2 x 2 on tablets, one row on desktop. */
-const phaseBorders = [
-  "",
-  "border-t sm:border-t-0 sm:border-l",
-  "border-t lg:border-t-0 lg:border-l",
-  "border-t sm:border-l lg:border-t-0",
-];
-
-/** What the first six months usually look like, over an illustrative curve. */
-export function SeoTimeline() {
-  const { line, area, width, height } = timelinePaths();
-
-  return (
-    <section aria-labelledby="timeline-title" className="px-4 py-24">
-      <SectionHeading
-        id="timeline-title"
-        title="What the first *six months* look like"
-        description="SEO is slow to start and steady once it moves. This is the usual shape, so you know what to expect and when."
-      />
-      <div className="mx-auto mt-14 max-w-7xl overflow-hidden rounded-[2rem] border border-border bg-card">
-        <div className="relative h-40 border-b border-border sm:h-52">
-          <div aria-hidden="true" className="absolute inset-0 grid grid-cols-4">
-            {seoTimeline.map((phase, i) => (
-              <span key={phase.when} className={cn(i % 2 === 1 && "bg-secondary/60", i > 0 && "border-l border-border")} />
-            ))}
-          </div>
-          <svg
-            aria-hidden="true"
-            viewBox={`0 0 ${width} ${height}`}
-            preserveAspectRatio="none"
-            className="absolute inset-x-0 bottom-0 h-[85%] w-full overflow-visible"
-          >
-            <defs>
-              <linearGradient id="seo-timeline-area" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" style={{ stopColor: "var(--primary)", stopOpacity: 0.22 }} />
-                <stop offset="1" style={{ stopColor: "var(--primary)", stopOpacity: 0 }} />
-              </linearGradient>
-            </defs>
-            <path d={area} fill="url(#seo-timeline-area)" />
-            <path d={line} fill="none" strokeWidth={2.5} vectorEffect="non-scaling-stroke" className="stroke-primary" />
-          </svg>
-          <p className="absolute top-4 right-4 rounded-full border border-border bg-card px-3 py-1 text-xs text-muted-foreground">
-            Illustration, not a forecast
-          </p>
-        </div>
-
-        <ol className="grid sm:grid-cols-2 lg:grid-cols-4">
-          {seoTimeline.map((phase, i) => (
-            <li
-              key={phase.when}
-              className={cn("flex flex-col p-6 sm:p-7", phaseBorders[i])}
-            >
-              <p className="text-sm font-semibold text-primary">{phase.when}</p>
-              <h3 className="mt-2 text-xl font-semibold tracking-[-0.01em]">{phase.title}</h3>
-              <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                {phase.work.map((item) => (
-                  <li key={item} className="flex gap-2.5">
-                    <span aria-hidden="true" className="mt-2 size-1.5 shrink-0 rounded-full bg-primary/50" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-auto pt-6 text-sm">
-                <span className="block rounded-2xl bg-secondary px-4 py-3">
-                  <span className="block text-xs text-muted-foreground">What you will notice</span>
-                  <span className="font-medium">{phase.expect}</span>
-                </span>
-              </p>
-            </li>
-          ))}
-        </ol>
-      </div>
-      <p className="mx-auto mt-5 max-w-7xl text-sm text-muted-foreground">
-        Timelines depend on your competition and where your site starts. We set expectations for your site in the audit.
-      </p>
     </section>
   );
 }

@@ -3,6 +3,7 @@ import { LatestPosts } from "@/components/sections/latest-posts";
 import { categoryForService } from "@/lib/blog-categories";
 import type { Service } from "@/lib/services";
 import { site } from "@/lib/site";
+import { AuditBand } from "./audit-band";
 import { ComparisonTable } from "./comparison-table";
 import { Deliverables } from "./deliverables";
 import { FinalCta, MobileCtaBar } from "./final-cta";
@@ -71,6 +72,7 @@ export function ServiceTemplate({ service }: { service: Service }) {
   return (
     <>
       <ServiceHero service={service} />
+      <AuditBand service={service} />
       <PainPoints service={service} />
       <Deliverables service={service} />
       <SubServices service={service} />

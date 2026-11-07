@@ -205,6 +205,15 @@
   }
 }
 
+/* Printing an invoice from the admin: only the invoice, not the sidebar. */
+@media print {
+  [data-slot="sidebar"],
+  [data-slot="sidebar-gap"],
+  [data-slot="sidebar-container"] {
+    display: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .logo-slider__track,
   .animate-scroll,

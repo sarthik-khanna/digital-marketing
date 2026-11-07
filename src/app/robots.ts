@@ -3,7 +3,8 @@ import { site } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: { userAgent: "*", allow: "/", disallow: "/admin" },
+    // /invoice/<token> pages are private client links (also noindex).
+    rules: { userAgent: "*", allow: "/", disallow: ["/admin", "/invoice"] },
     sitemap: new URL("/sitemap.xml", site.url).toString(),
   };
 }
