@@ -116,11 +116,54 @@ const schema = [
     updated_at timestamptz not null default now()
   )`,
   `create index if not exists invoices_created_at_idx on invoices (created_at desc)`,
+  // E-sign app (apps/e-sign): client accounts, their sessions and their agreements.
+  `create table if not exists esign_users (
+    id bigint generated always as identity primary key,
+    name text not null,
+    username text not null unique,
+    email text not null unique,
+    password_hash text not null,
+    created_at timestamptz not null default now()
+  )`,
+  `create table if not exists esign_sessions (
+    token_hash text primary key,
+    user_id bigint not null references esign_users (id) on delete cascade,
+    expires_at timestamptz not null
+  )`,
+  `create index if not exists esign_sessions_user_id_idx on esign_sessions (user_id)`,
+  // The plan is copied into each agreement, so later price changes never alter a signed one.
+  // pdf_base64 is the signed PDF exactly as emailed to the client.
+  `create table if not exists esign_agreements (
+    id bigint generated always as identity primary key,
+    user_id bigint not null references esign_users (id),
+    status text not null default 'pending' check (status in ('pending', 'signed', 'completed')),
+    plan_id text not null,
+    plan_name text not null,
+    price_cents integer not null,
+    currency text not null,
+    duration_days integer not null,
+    services jsonb not null,
+    terms_version text not null,
+    signer_name text,
+    signature_png text,
+    signed_at timestamptz,
+    signer_ip text,
+    signer_user_agent text,
+    content_hash text,
+    pdf_base64 text,
+    emailed_at timestamptz,
+    created_at timestamptz not null default now(),
+    updated_at timestamptz not null default now()
+  )`,
+  `create index if not exists esign_agreements_user_id_idx on esign_agreements (user_id, created_at desc)`,
+  `create index if not exists esign_agreements_created_at_idx on esign_agreements (created_at desc)`,
+  // At most one agreement waiting for a signature per client (choosing another plan switches it).
+  `create unique index if not exists esign_agreements_one_pending_idx on esign_agreements (user_id) where status = 'pending'`,
 ];
 
 for (const statement of schema) await sql.query(statement);
 console.log(
-  "Tables ready: leads, callback_requests, audit_requests, admins, admin_sessions, password_resets, blog_posts, invoices, invoice_counters",
+  "Tables ready: leads, callback_requests, audit_requests, admins, admin_sessions, password_resets, blog_posts, invoices, invoice_counters, esign_users, esign_sessions, esign_agreements",
 );
 
 // Starter articles: inserted once, matched by slug, never overwritten (edit them at /admin/blog).

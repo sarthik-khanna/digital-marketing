@@ -2,6 +2,9 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* The e-sign app (apps/e-sign) has its own stylesheet; keep its classes out of the website's CSS. */
+@source not "../../apps";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

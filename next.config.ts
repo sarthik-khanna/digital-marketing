@@ -1,9 +1,26 @@
 import type { NextConfig } from "next";
 
+/**
+ * The e-sign app (apps/e-sign) is a separate Next.js app served at /e-sign
+ * (multi-zones): this site forwards /e-sign/* to it, so visitors stay on this
+ * domain. ESIGN_URL is that app's own address, e.g. https://tdm-esign.vercel.app.
+ * In development it defaults to `npm run dev:esign` on port 3001.
+ */
+const esignUrl = (
+  process.env.ESIGN_URL ?? (process.env.NODE_ENV === "production" ? "" : "http://localhost:3001")
+).replace(/\/+$/, "");
+
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  async rewrites() {
+    if (!esignUrl) return [];
+    return [
+      { source: "/e-sign", destination: `${esignUrl}/e-sign` },
+      { source: "/e-sign/:path+", destination: `${esignUrl}/e-sign/:path+` },
+    ];
+  },
   async redirects() {
     return [
       // Renamed when the site moved to an international audience.

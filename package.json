@@ -2,11 +2,18 @@
   "name": "digital-marketiing",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "dev": "next dev",
+    "dev:esign": "npm run dev --workspace=@tdm/e-sign",
     "build": "next build",
+    "build:esign": "npm run build --workspace=@tdm/e-sign",
     "start": "next start",
     "lint": "eslint",
+    "test": "npm test --workspace=@tdm/esign-core",
     "db:setup": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --env-file-if-exists=.env.local scripts/db-setup.mjs",
     "admin:add": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --env-file-if-exists=.env.local scripts/admin-add.mjs"
   },
@@ -14,6 +21,8 @@
     "@base-ui/react": "^1.9.0",
     "@neondatabase/serverless": "^1.2.0",
     "@tabler/icons-react": "^3.49.0",
+    "@tdm/esign-core": "*",
+    "@tdm/shared": "*",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.5.0",
     "lucide-react": "^1.59.0",

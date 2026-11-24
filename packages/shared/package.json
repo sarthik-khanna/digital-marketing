@@ -1,0 +1,16 @@
+{
+  "name": "@tdm/shared",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Code shared by the website and the e-sign app: the Neon client, password hashing and Resend email.",
+  "type": "module",
+  "exports": {
+    "./db": "./src/db.ts",
+    "./email": "./src/email.ts",
+    "./password": "./src/password.ts"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.2.0",
+    "server-only": "^0.0.1"
+  }
+}

@@ -14,14 +14,16 @@ export const received = new Intl.DateTimeFormat("en-GB", {
   timeZone: "UTC",
 });
 
-export function Pagination({ path, page, total }: { path: string; page: number; total: number }) {
+/** `query` (e.g. "q=asha&status=signed") is kept on every page link. */
+export function Pagination({ path, page, total, query = "" }: { path: string; page: number; total: number; query?: string }) {
   const pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  const href = (target: number) => `${path}?${query ? `${query}&` : ""}page=${target}`;
   if (pages === 1) return null;
 
   return (
     <nav aria-label="Pagination" className="mt-6 flex items-center justify-between text-sm">
       {page > 1 ? (
-        <Link href={`${path}?page=${page - 1}`} className="text-primary hover:underline">
+        <Link href={href(page - 1)} className="text-primary hover:underline">
           ← Newer
         </Link>
       ) : (
@@ -31,7 +33,7 @@ export function Pagination({ path, page, total }: { path: string; page: number; 
         Page {page} of {pages}
       </span>
       {page < pages ? (
-        <Link href={`${path}?page=${page + 1}`} className="text-primary hover:underline">
+        <Link href={href(page + 1)} className="text-primary hover:underline">
           Older →
         </Link>
       ) : (

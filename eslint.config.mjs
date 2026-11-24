@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Workspace apps (apps/*) build into their own folders.
+    "apps/*/.next/**",
+    "apps/*/next-env.d.ts",
   ]),
 ]);
 

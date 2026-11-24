@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import {
   ClipboardCheckIcon,
   ExternalLinkIcon,
+  FileSignatureIcon,
   InboxIcon,
   LogOutIcon,
   NewspaperIcon,
@@ -100,6 +101,24 @@ export function AdminSidebar({ account }: { account: React.ReactNode }) {
                 >
                   <ReceiptIcon />
                   <span>Invoices</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>E-Sign</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  render={<Link href="/admin/e-sign" onClick={close} />}
+                  isActive={pathname.startsWith("/admin/e-sign")}
+                  tooltip="E-Sign Agreements"
+                >
+                  <FileSignatureIcon />
+                  <span>E-Sign Agreements</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>

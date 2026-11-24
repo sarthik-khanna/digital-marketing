@@ -9,6 +9,28 @@ npm run dev      # http://localhost:3000
 npm run build    # production build
 ```
 
+## E-Sign app (`/e-sign`)
+
+An npm-workspaces monorepo: the website is the root app, and `apps/e-sign` is a separate
+Next.js app that the website serves at `/e-sign` (Next.js multi-zones). Clients sign up or
+sign in, choose a Weekly, Monthly or Quarterly plan, then read and e-sign their agreement.
+The signed PDF is stored, emailed to them, and listed for admins at `/admin/e-sign`.
+
+```bash
+npm run db:setup     # once: adds the esign_* tables (existing data untouched)
+npm run dev          # website, http://localhost:3000
+npm run dev:esign    # e-sign app on :3001, open it at http://localhost:3000/e-sign
+npm run build:esign  # production build of the e-sign app
+npm test             # unit tests for packages/esign-core
+```
+
+Deploying: create a second Vercel project from this repo with **Root Directory
+`apps/e-sign`** and the same `DATABASE_URL`, `RESEND_API_KEY` and `RESEND_FROM_EMAIL`. Then set
+`ESIGN_URL` on the website's project to that project's URL (for example
+`https://tdm-esign.vercel.app`) and redeploy the website. Before going live, set the real
+plan prices in `packages/esign-core/src/plans.ts` and the provider details in
+`packages/esign-core/src/agreement.ts`, and have the terms reviewed.
+
 ## Pages
 
 | Route | File |

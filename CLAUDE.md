@@ -4,6 +4,13 @@
 
 Marketing site for a digital marketing agency client. Next.js 16 (App Router, `cacheComponents` on), Tailwind CSS v4, shadcn (base-nova style), TypeScript.
 
+## Monorepo (npm workspaces)
+- The website stays at the repo root (its deploy settings are unchanged). Workspaces: `apps/*` and `packages/*`.
+- `apps/e-sign`: a separate Next.js app (`basePath: "/e-sign"`) where clients sign up/sign in, choose a plan and e-sign their agreement. The website serves it at `/e-sign` through Next.js multi-zones: `rewrites()` in the root `next.config.ts` forward `/e-sign/*` to `ESIGN_URL` (default `http://localhost:3001` in dev). Links between the two apps are plain `<a>`, never `next/link`. It is deployed as its own project (root directory `apps/e-sign`) with the same env vars; locally it also reads the root `.env.local`.
+- `packages/shared` (`@tdm/shared`): the Neon client, scrypt password hashing and Resend email (with attachments). `src/lib/db.ts`, `src/lib/password.ts` and `src/lib/email.ts` re-export from it, so existing imports are unchanged.
+- `packages/esign-core` (`@tdm/esign-core`): plans (`plans.ts`; TODO(client) prices), agreement content built once and rendered as HTML and PDF (`agreement.ts`, provider details and terms version there), the PDF (`pdf.ts`, pdf-lib), the signed-copy email, the DB store and delivery. Relative imports use `.ts` extensions so `npm test` runs it under plain Node (`node --test`).
+- Commands: `npm run dev` + `npm run dev:esign`, `npm run build` (website), `npm run build:esign`, `npm test` (esign-core unit tests).
+
 ## Slash commands
 - `/ui-libraries <what to build>`: the full workflow for building with the three UI libraries
 - `/aceternity <slug>`, `/vengeance <slug>`, `/skiper <number>`: install one component
@@ -27,6 +34,7 @@ Enquiries from the contact form are saved to Neon Postgres (`leads` table) and l
 - The leads list uses shadcn `table` on md+ and stacked cards on phones (`src/components/admin/leads-table.tsx`).
 - Call-back requests: `src/components/callback-dialog.tsx` (shadcn `dialog`, provided by `(site)/layout.tsx`) opens from the navbar button and pops up once after 15 s (7-day snooze after closing, never after submitting, never on `/contact`; flag in localStorage). Saved by `requestCallback` in `src/app/actions.ts` to `callback_requests`, listed at `/admin/callbacks`.
 - Invoices (`/admin/invoices`, list; `/new` (optional `?lead=` prefill from an enquiry), `/edit?id=` drafts only, `/view?id=` preview with send / mark paid / delete draft; actions in `src/app/admin/invoice-actions.ts`). Tables `invoices` and `invoice_counters` (db:setup). Amounts are stored in paise (`src/lib/invoice-math.ts`). The number (`TDM/2026-27/0001`, per Indian financial year) and issue date are fixed on first send; only un-numbered drafts can be deleted. Sending emails the invoice through Resend (`src/lib/invoice-email.ts`, reply-to the business email) with a private link to `/invoice/<token>` (token stored only as a hash, rotated on each resend, noindex and disallowed in robots), which renders `components/invoice/invoice-document.tsx` with print-to-PDF. Seller details (legal name, address, GSTIN, bank, UPI) live in `src/lib/invoice-settings.ts`; empty ones are hidden and GST defaults to 0% until a GSTIN is set. Enquiries have a "Create invoice" link.
+- E-Sign Agreements (`/admin/e-sign`, list searchable by client name/username/email with status chips Pending/Signed/Completed; `/view?id=` the record: client, plan, signature record, PDF preview, other agreements; `/pdf?id=` (`&download=1`) serves the stored PDF to admins). Resend action in `src/app/admin/esign-actions.ts`. Tables `esign_users`, `esign_sessions`, `esign_agreements` (db:setup; one pending agreement per client; the plan is copied into the agreement; the signed PDF is stored as base64). Statuses: pending (plan chosen), signed (signed, PDF stored), completed (signed copy emailed). Client accounts are separate from admins; password hashes are never selected for display.
 - Anything that reads the session cookie or `searchParams` renders inside `<Suspense>` (Cache Components).
 
 ## Layout
