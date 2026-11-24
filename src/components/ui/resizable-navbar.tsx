@@ -3,19 +3,37 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
-import {
-  AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
-} from "motion/react";
+import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useSyncExternalStore } from "react";
 
+/** Scroll distance (px) at which the pill drops in. Keep it above 76, the
+ * anchored bar's bottom edge, so that bar is already off screen at the swap. */
+const FLOAT_AFTER = 100;
+
+const floatingShadow =
+  "shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]";
+
+const subscribeToScroll = (onChange: () => void) => {
+  window.addEventListener("scroll", onChange, { passive: true });
+  return () => window.removeEventListener("scroll", onChange);
+};
+const isPastAnchoredBar = () => window.scrollY > FLOAT_AFTER;
+const notPastAnchoredBar = () => false;
+
+const withVisible = (children: React.ReactNode, visible: boolean) =>
+  React.Children.map(children, (child) =>
+    React.isValidElement(child)
+      ? React.cloneElement(
+          child as React.ReactElement<{ visible?: boolean }>,
+          { visible },
+        )
+      : child,
+  );
 
 interface NavbarProps {
   children: React.ReactNode;
-  className?: string;
 }
 
 interface NavBodyProps {
@@ -53,79 +71,62 @@ interface MobileNavMenuProps {
   onClose: () => void;
 }
 
-export const Navbar = ({ children, className }: NavbarProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const [visible, setVisible] = useState<boolean>(false);
-
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 100) {
-      setVisible(true);
-    } else {
-      setVisible(false);
-    }
-  });
+/**
+ * Renders the bar twice: a full-width copy anchored to the top of the page,
+ * which scrolls away with the hero, and a floating pill that drops in from
+ * above once the anchored copy has left the screen. Only one is ever visible,
+ * and `invisible` keeps the other out of the tab order and accessibility tree.
+ */
+export const Navbar = ({ children }: NavbarProps) => {
+  const floating = useSyncExternalStore(
+    subscribeToScroll,
+    isPastAnchoredBar,
+    notPastAnchoredBar,
+  );
 
   return (
-    <m.div
-      ref={ref}
-      // IMPORTANT: Change this to class of `fixed` if you want the navbar to be fixed
-      className={cn("sticky inset-x-0 top-20 z-40 w-full", className)}
-    >
-      {/* Frosted mask behind the full-width bar at the top of the page; the
-          pill that appears on scroll has its own background, so it fades out. */}
+    <>
       <div
-        aria-hidden="true"
         className={cn(
-          "pointer-events-none fixed inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-background via-background/75 to-transparent backdrop-blur-md transition-opacity duration-300 [mask-image:linear-gradient(to_bottom,black_45%,transparent)] motion-reduce:transition-none",
-          visible ? "opacity-0" : "opacity-100",
+          "absolute inset-x-0 top-3 z-40 w-full",
+          floating && "invisible",
         )}
-      />
-      {React.Children.map(children, (child) =>
-        React.isValidElement(child)
-          ? React.cloneElement(
-              child as React.ReactElement<{ visible?: boolean }>,
-              { visible },
-            )
-          : child,
-      )}
-    </m.div>
+      >
+        {/* Frosted mask keeping the bar legible over the hero artwork. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 -top-3 -z-10 h-32 bg-gradient-to-b from-background via-background/75 to-transparent backdrop-blur-md [mask-image:linear-gradient(to_bottom,black_45%,transparent)]"
+        />
+        {withVisible(children, false)}
+      </div>
+      <div
+        className={cn(
+          "fixed inset-x-0 top-8 z-40 w-full transition-[translate,visibility] motion-reduce:transition-none",
+          floating
+            ? "duration-500 ease-[cubic-bezier(0.34,1.3,0.64,1)]"
+            : "invisible -translate-y-[calc(100%+2.5rem)] duration-300 ease-in",
+        )}
+      >
+        {withVisible(children, true)}
+      </div>
+    </>
   );
 };
 
 export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   return (
-    <m.div
-      animate={{
-        backdropFilter: visible ? "blur(10px)" : "none",
-        boxShadow: visible
-          ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
-          : "none",
-        width: visible ? "40%" : "100%",
-        y: visible ? 20 : 0,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 200,
-        damping: 50,
-      }}
-      style={{
-        // Room for the links plus two compact buttons on the right.
-        minWidth: "860px",
-      }}
+    <div
       // Lets children restyle themselves for the shrunken, scrolled bar.
       data-scrolled={visible ? "true" : undefined}
       className={cn(
-        "group/nav relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-2 lg:flex",
-        visible && "bg-card/85",
+        // min-w: room for the links plus two compact buttons on the right.
+        "group/nav relative z-[60] mx-auto hidden w-full max-w-7xl min-w-[860px] flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-2 lg:flex",
+        visible && ["w-[40%] bg-card/85 backdrop-blur-[10px]", floatingShadow],
         className,
       )}
     >
       {children}
-    </m.div>
+    </div>
   );
 };
 
@@ -167,31 +168,18 @@ export const NavItems = ({
 
 export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
   return (
-    <m.div
-      animate={{
-        backdropFilter: visible ? "blur(10px)" : "none",
-        boxShadow: visible
-          ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
-          : "none",
-        width: visible ? "90%" : "100%",
-        paddingRight: visible ? "12px" : "0px",
-        paddingLeft: visible ? "12px" : "0px",
-        borderRadius: visible ? "4px" : "2rem",
-        y: visible ? 20 : 0,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 200,
-        damping: 50,
-      }}
+    <div
       className={cn(
-        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:hidden",
-        visible && "bg-card/85",
+        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between rounded-[2rem] bg-transparent px-0 py-2 lg:hidden",
+        visible && [
+          "w-[90%] rounded-[4px] bg-card/85 px-3 backdrop-blur-[10px]",
+          floatingShadow,
+        ],
         className,
       )}
     >
       {children}
-    </m.div>
+    </div>
   );
 };
 

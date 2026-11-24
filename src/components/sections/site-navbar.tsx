@@ -30,7 +30,7 @@ export function SiteNavbar() {
 
   return (
     <header>
-      <Navbar className="fixed top-3">
+      <Navbar>
         <NavBody>
           <NavbarLogo name={site.name} logo={site.logo} />
           <NavItems items={items} activeLink={active} />
