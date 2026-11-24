@@ -31,7 +31,6 @@ export function structuredData(service: Service) {
       serviceType: service.eyebrow,
       description: service.metaDescription,
       url: url(service.href),
-      areaServed: { "@type": "Country", name: "India" },
       provider: { "@type": "Organization", name: site.name, url: site.url },
     },
     {

@@ -11,7 +11,7 @@ import { getPublishedPosts } from "@/lib/blog";
 export const metadata: Metadata = {
   title: "Blog: SEO, Google Ads and Meta Ads guides",
   description:
-    "Practical guides on SEO, Google Ads, Meta ads and performance marketing for Indian businesses, from the Tech Digital Marketer team.",
+    "Practical guides on SEO, Google Ads, Meta ads and performance marketing for growing businesses, from the Tech Digital Marketer team.",
   alternates: { canonical: "/blog" },
 };
 

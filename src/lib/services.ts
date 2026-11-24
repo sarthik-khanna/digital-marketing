@@ -1,6 +1,6 @@
 /**
  * The four service pages: one typed record each, rendered by the shared
- * sections in src/components/services/. Copy is written for Indian businesses.
+ * sections in src/components/services/. Copy is written for growing businesses in any market.
  *
  * Nothing here claims results. Facts only the business can supply are marked
  * TODO(client): plan prices, the exact tool stack, and case studies. Sections
@@ -44,7 +44,7 @@ export type ServiceId = "seo" | "ppc" | "performance" | "meta";
 
 export type Plan = {
   name: string;
-  /** Starting price in rupees, e.g. "₹25,000". null shows "Get a quote". TODO(client): real prices. */
+  /** Starting price, e.g. "$1,500". null shows "Get a quote". TODO(client): real prices. */
   price: string | null;
   /** Shown after the price, e.g. "/ month". */
   cadence: string;
@@ -115,13 +115,13 @@ export const services: Service[] = [
     short:
       "Technical fixes, search-led content and local SEO that build steady, free traffic month after month.",
     span: "md:col-span-2",
-    metaTitle: "SEO Services in India That Bring In Customers, Not Just Traffic",
+    metaTitle: "SEO Services That Bring In Customers, Not Just Traffic",
     metaDescription:
-      "Technical SEO, content, local SEO and link building for Indian businesses. Tech Digital Marketer grows organic traffic that turns into enquiries and sales.",
+      "Technical SEO, content, local SEO and link building for growing businesses. Tech Digital Marketer grows organic traffic that turns into enquiries and sales.",
     eyebrow: "Search engine optimisation",
     h1: "Show up where your customers *search*",
     subtitle:
-      "SEO for Indian businesses across Google search, Maps and AI answers, measured on the calls, forms and WhatsApp enquiries it brings in.",
+      "SEO for growing businesses across Google search, Maps and AI answers, measured on the calls, forms and WhatsApp enquiries it brings in.",
     outcomes: [
       "Rank for the searches your customers actually make",
       "Turn organic visitors into calls, forms and WhatsApp enquiries",
@@ -149,10 +149,10 @@ export const services: Service[] = [
     ],
     deliverables: [
       { title: "Technical SEO audit and fixes", body: "Crawling, indexing, page speed, Core Web Vitals and site structure problems found, prioritised and fixed.", icon: Gauge },
-      { title: "Keyword and intent research", body: "What your customers search at every stage, in English and regional terms, and which keywords are worth winning.", icon: Search },
+      { title: "Keyword and intent research", body: "What your customers search at every stage, in the words and local terms they actually use, and which keywords are worth winning.", icon: Search },
       { title: "Content strategy and writing", body: "Service pages, guides and blogs built to rank and to turn readers into enquiries.", icon: FileText },
       { title: "On-page optimisation", body: "Titles, headings, internal links and structured data tuned page by page.", icon: LayoutTemplate },
-      { title: "Link building", body: "Relevant, earned links from Indian and industry publications, never paid directories or link farms.", icon: Link2 },
+      { title: "Link building", body: "Relevant, earned links from respected industry and local publications, never paid directories or link farms.", icon: Link2 },
       { title: "Local SEO", body: "Google Business Profile, local citations and a review plan so you show up in Maps and 'near me' searches.", icon: MapPin },
     ],
     subServices: [
@@ -168,7 +168,7 @@ export const services: Service[] = [
         label: "Local SEO",
         title: "Show up when nearby customers search",
         body: "For clinics, showrooms, institutes and service businesses, the map pack is where calls come from.",
-        points: ["Google Business Profile optimisation", "NAP citations across Indian directories", "Location pages for each branch or city", "A system for genuine customer reviews"],
+        points: ["Google Business Profile optimisation", "NAP citations across trusted local directories", "Location pages for each branch or city", "A system for genuine customer reviews"],
       },
       {
         id: "content",
@@ -204,11 +204,11 @@ export const services: Service[] = [
     report: {
       before: {
         title: "A typical SEO report",
-        rows: [["Impressions", "1,24,000"], ["Keywords ranked", "860"], ["Backlinks built", "45"], ["Domain rating", "+3"]],
+        rows: [["Impressions", "124,000"], ["Keywords ranked", "860"], ["Backlinks built", "45"], ["Domain rating", "+3"]],
       },
       after: {
         title: "Our SEO report",
-        rows: [["Organic enquiries", "42"], ["Cost per organic lead", "₹1,150"], ["Top-3 money keywords", "18"], ["Revenue from organic", "₹6.2 lakh"]],
+        rows: [["Organic enquiries", "42"], ["Cost per organic lead", "$45"], ["Top-3 money keywords", "18"], ["Revenue from organic", "$24,800"]],
       },
     },
     plans: [
@@ -235,9 +235,9 @@ export const services: Service[] = [
     title: "PPC",
     short: "Google Ads campaigns built around cost per enquiry and sale, not clicks.",
     span: "",
-    metaTitle: "Google Ads and PPC Management in India, Tracked to the Sale",
+    metaTitle: "Google Ads and PPC Management, Tracked to the Sale",
     metaDescription:
-      "Google Ads management for Indian businesses: search, shopping, display and YouTube campaigns built around cost per lead, with clear monthly reporting.",
+      "Google Ads management for growing businesses: search, shopping, display and YouTube campaigns built around cost per lead, with clear monthly reporting.",
     eyebrow: "Pay-per-click advertising",
     h1: "Google Ads that *pay back*, tracked to every lead",
     subtitle:
@@ -283,14 +283,14 @@ export const services: Service[] = [
     kpis: [
       { label: "Cost per lead", description: "What each enquiry costs, by campaign" },
       { label: "Conversion rate", description: "Share of clicks that become enquiries or sales" },
-      { label: "Return on ad spend", description: "Revenue for every rupee spent, for e-commerce" },
+      { label: "Return on ad spend", description: "Revenue for every dollar spent, for e-commerce" },
       { label: "Search impression share", description: "How often you show for the searches you target" },
       { label: "Quality Score", description: "Ad and landing page relevance, which lowers cost per click" },
       { label: "Wasted spend", description: "Budget on irrelevant searches, cut every week" },
     ],
     report: {
-      before: { title: "A typical PPC report", rows: [["Impressions", "2,40,000"], ["Clicks", "6,100"], ["CTR", "2.5%"], ["Avg. CPC", "₹18"]] },
-      after: { title: "Our PPC report", rows: [["Qualified leads", "186"], ["Cost per lead", "₹590"], ["Sales from ads", "31"], ["Return on ad spend", "4.1x"]] },
+      before: { title: "A typical PPC report", rows: [["Impressions", "240,000"], ["Clicks", "6,100"], ["CTR", "2.5%"], ["Avg. CPC", "$1.20"]] },
+      after: { title: "Our PPC report", rows: [["Qualified leads", "186"], ["Cost per lead", "$38"], ["Sales from ads", "31"], ["Return on ad spend", "4.1x"]] },
     },
     plans: [
       { name: "Starter", price: null, cadence: "/ month + ad spend", description: "One search campaign for a single service or location.", features: ["Account set-up or audit", "Conversion and call tracking", "1 search campaign", "Weekly optimisation", "Monthly report"] },
@@ -299,7 +299,7 @@ export const services: Service[] = [
     ],
     results: [],
     faqs: [
-      { question: "How much should we spend on Google Ads?", answer: "It depends on your industry and city. As a guide, at least ₹30,000 a month in ad spend gives campaigns enough data to learn. We recommend a budget after the audit, based on your margins and goals." },
+      { question: "How much should we spend on Google Ads?", answer: "It depends on your industry and city. As a guide, at least $1,500 a month in ad spend gives campaigns enough data to learn. We recommend a budget after the audit, based on your margins and goals." },
       { question: "How do you charge?", answer: "A monthly management fee agreed before we start, based on the scope of work. Your ad spend is paid directly to Google from your own account." },
       { question: "Who owns the ad account?", answer: "You do. The account, data and history stay in your name, whether or not we keep working together." },
       { question: "Can you take over our existing campaigns?", answer: "Yes. We start with an audit, keep what works and fix what does not." },
@@ -316,9 +316,9 @@ export const services: Service[] = [
     title: "Performance Marketing",
     short: "Full-funnel, multi-channel campaigns judged on cost per customer and return on spend.",
     span: "",
-    metaTitle: "Performance Marketing Agency in India Built Around Your Numbers",
+    metaTitle: "Performance Marketing Agency Built Around Your Numbers",
     metaDescription:
-      "Full-funnel performance marketing across Google, Meta and email for Indian businesses, planned around cost per acquisition, ROAS and payback.",
+      "Full-funnel performance marketing across Google, Meta and email for growing businesses, planned around cost per acquisition, ROAS and payback.",
     eyebrow: "Performance marketing",
     h1: "Performance marketing built around your *numbers*",
     subtitle:
@@ -363,7 +363,7 @@ export const services: Service[] = [
     tools: ["Google Ads", "Meta Ads Manager", "Google Analytics 4", "Google Tag Manager", "Meta Conversions API", "Looker Studio", "WhatsApp Business", "HubSpot", "Zoho CRM", "Shopify"],
     kpis: [
       { label: "Customer acquisition cost", description: "Total spend divided by new customers, across channels" },
-      { label: "Return on ad spend", description: "Revenue per rupee of media, blended and by channel" },
+      { label: "Return on ad spend", description: "Revenue per dollar of media, blended and by channel" },
       { label: "Payback period", description: "How long a new customer takes to cover their cost" },
       { label: "Conversion rate", description: "Visitors who buy or enquire, by landing page" },
       { label: "Lifetime value", description: "Revenue per customer over time, from your sales data" },
@@ -371,7 +371,7 @@ export const services: Service[] = [
     ],
     report: {
       before: { title: "Channel-by-channel reports", rows: [["Google conversions", "212"], ["Meta conversions", "174"], ["Email conversions", "96"], ["Total claimed", "482"]] },
-      after: { title: "Our blended report", rows: [["Actual new customers", "268"], ["Blended CAC", "₹1,420"], ["Blended ROAS", "3.6x"], ["Payback", "2.1 months"]] },
+      after: { title: "Our blended report", rows: [["Actual new customers", "268"], ["Blended CAC", "$85"], ["Blended ROAS", "3.6x"], ["Payback", "2.1 months"]] },
     },
     plans: [
       { name: "Starter", price: null, cadence: "/ month + ad spend", description: "Two paid channels run together against one target.", features: ["Tracking and attribution set-up", "Google and Meta campaigns", "Weekly optimisation", "Blended dashboard", "Monthly report"] },
@@ -381,7 +381,7 @@ export const services: Service[] = [
     results: [],
     faqs: [
       { question: "How is this different from PPC?", answer: "PPC is one channel. Performance marketing plans several channels together, such as Google, Meta, email and WhatsApp, against one set of targets for cost and return." },
-      { question: "Which channels will you use?", answer: "Whichever your numbers support. For most Indian businesses that means Google and Meta first, with YouTube, email and WhatsApp added where they help." },
+      { question: "Which channels will you use?", answer: "Whichever your numbers support. For most businesses that means Google and Meta first, with YouTube, email and WhatsApp added where they help." },
       { question: "Is performance marketing right for a small business?", answer: "Yes, if you can track enquiries or sales. We start with one or two channels on a modest budget and add more only when the numbers justify it." },
       { question: "What results should we expect?", answer: "We agree targets for cost per lead or sale and return on ad spend in the first month, then review them with you every month." },
       { question: "Why do platform numbers not match our sales?", answer: "Each platform counts any sale it touched, so they overlap. We reconcile platform data with your actual orders or CRM, so you see one honest number." },
@@ -397,9 +397,9 @@ export const services: Service[] = [
     title: "Meta Ads",
     short: "Facebook and Instagram campaigns with creative that stops the scroll and brings in leads.",
     span: "md:col-span-2",
-    metaTitle: "Facebook and Instagram Ads Management in India",
+    metaTitle: "Facebook and Instagram Ads Management",
     metaDescription:
-      "Meta ads for Indian businesses: Facebook and Instagram campaigns with creative testing, Conversions API tracking, lead forms and retargeting.",
+      "Meta ads for growing businesses: Facebook and Instagram campaigns with creative testing, Conversions API tracking, lead forms and retargeting.",
     eyebrow: "Facebook and Instagram advertising",
     h1: "Meta ads that *stop the scroll* and bring in leads",
     subtitle:
@@ -422,7 +422,7 @@ export const services: Service[] = [
     ],
     deliverables: [
       { title: "Pixel and Conversions API set-up", body: "Browser and server-side tracking so Meta optimises for real leads and purchases.", icon: Radar },
-      { title: "Creative strategy and production", body: "Static, video and Reels-style ads in English, Hindi or your regional language.", icon: Brush },
+      { title: "Creative strategy and production", body: "Static, video and Reels-style ads in English or the languages your customers speak.", icon: Brush },
       { title: "Audience and campaign structure", body: "Broad, interest and lookalike audiences organised for fast learning.", icon: Blocks },
       { title: "Retargeting and catalogue ads", body: "Dynamic product ads and follow-ups for people who visited but did not buy.", icon: ShoppingBag },
       { title: "Lead form and WhatsApp campaigns", body: "Instant forms and click-to-WhatsApp ads for businesses that sell on conversation.", icon: MessageCircle },
@@ -432,7 +432,7 @@ export const services: Service[] = [
       { id: "leads", label: "Lead generation", title: "Enquiries your sales team can close", body: "Lead forms and landing pages tuned for quality, not just volume.", points: ["Qualifying questions on forms", "Click-to-WhatsApp and call ads", "CRM sync for fast follow-up", "Lead quality feedback loop"] },
       { id: "ecommerce", label: "E-commerce sales", title: "Profitable sales from Facebook and Instagram", body: "Advantage+ shopping and catalogue campaigns with ROAS targets.", points: ["Catalogue and feed set-up", "Advantage+ shopping campaigns", "Collection and carousel ads", "Purchase-value optimisation"] },
       { id: "retargeting", label: "Retargeting", title: "Bring back the people who nearly bought", body: "Sequenced ads for visitors, video viewers and engaged followers.", points: ["Website and engagement audiences", "Dynamic product ads", "Offer and reminder sequences", "Exclusions for recent buyers"] },
-      { id: "creative", label: "Creative production", title: "A steady supply of ads that work", body: "New concepts every month, built from customer research and past winners.", points: ["Static and carousel designs", "Reels and short video edits", "UGC-style scripts and briefs", "Hindi and regional language versions"] },
+      { id: "creative", label: "Creative production", title: "A steady supply of ads that work", body: "New concepts every month, built from customer research and past winners.", points: ["Static and carousel designs", "Reels and short video edits", "UGC-style scripts and briefs", "Versions in your customers' languages"] },
     ],
     steps: [
       { title: "Research and tracking", body: "Customer research, offer review and a tracking check before any money is spent.", points: ["Pixel and CAPI audit", "Customer research", "Offer review"] },
@@ -445,14 +445,14 @@ export const services: Service[] = [
     kpis: [
       { label: "Cost per lead", description: "What each enquiry costs, by campaign and creative" },
       { label: "Lead-to-contact rate", description: "Share of leads that answer and are genuine" },
-      { label: "Return on ad spend", description: "Revenue per rupee spent, for online stores" },
+      { label: "Return on ad spend", description: "Revenue per dollar spent, for online stores" },
       { label: "Thumb-stop rate", description: "Share of viewers who stop to watch the first seconds" },
       { label: "Creative fatigue", description: "Frequency and falling CTR, so ads are refreshed in time" },
       { label: "Event match quality", description: "How well tracking data matches Meta users" },
     ],
     report: {
-      before: { title: "A typical Meta report", rows: [["Reach", "3,80,000"], ["Post engagement", "12,400"], ["Link clicks", "5,200"], ["CPM", "₹92"]] },
-      after: { title: "Our Meta report", rows: [["Qualified leads", "214"], ["Cost per qualified lead", "₹410"], ["Leads contacted", "81%"], ["Winning creatives", "4 of 12"]] },
+      before: { title: "A typical Meta report", rows: [["Reach", "380,000"], ["Post engagement", "12,400"], ["Link clicks", "5,200"], ["CPM", "$9.50"]] },
+      after: { title: "Our Meta report", rows: [["Qualified leads", "214"], ["Cost per qualified lead", "$24"], ["Leads contacted", "81%"], ["Winning creatives", "4 of 12"]] },
     },
     plans: [
       { name: "Starter", price: null, cadence: "/ month + ad spend", description: "A lead or sales campaign with a monthly creative refresh.", features: ["Pixel and CAPI set-up", "1 campaign", "4 new creatives a month", "Weekly optimisation", "Monthly report"] },

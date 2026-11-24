@@ -4,6 +4,12 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  async redirects() {
+    return [
+      // Renamed when the site moved to an international audience.
+      { source: "/blog/local-seo-checklist-india", destination: "/blog/local-seo-checklist", permanent: true },
+    ];
+  },
   images: {
     // Demo photos only (see src/lib/images.ts). Remove once real photos live in /public.
     remotePatterns: [

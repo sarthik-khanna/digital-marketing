@@ -13,8 +13,8 @@ const credits = [
 ];
 
 // Contact lines left empty in site.ts are skipped.
-const contactLines = [
-  { icon: IconPhone, label: site.phone, href: `tel:${site.phone.replace(/[^+\d]/g, "")}` },
+const contactLines: { icon: typeof IconPhone; label: string; href?: string }[] = [
+  ...site.phones.map((phone) => ({ icon: IconPhone, label: phone.display, href: `tel:${phone.tel}` })),
   { icon: IconMail, label: site.email, href: `mailto:${site.email}` },
   { icon: IconMapPin, label: site.address },
 ].filter((line) => line.label);

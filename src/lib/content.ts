@@ -17,10 +17,10 @@ export type Faq = { question: string; answer: string };
  */
 
 export const hero = {
-  eyebrow: "Digital marketing agency in India",
+  eyebrow: "Digital marketing agency",
   headline: "Digital marketing that turns *clicks* into customers",
   subheading:
-    "SEO, Google Ads, performance marketing and Meta ads for growing Indian businesses, planned around your goals and measured on enquiries, sales and revenue.",
+    "SEO, Google Ads, performance marketing and Meta ads for growing businesses, planned around your goals and measured on enquiries, sales and revenue.",
   primaryCta: { label: "Get a free audit", href: "/contact" },
   secondaryCta: { label: "Explore our services", href: "#services" },
   tags: ["SEO", "Google Ads", "Meta Ads", "Performance Marketing", "Local SEO", "Analytics"],
@@ -33,7 +33,7 @@ export const intro = {
   eyebrow: "Why Tech Digital Marketer",
   title: "A marketing partner that treats your budget like *its own*",
   paragraphs: [
-    "We plan every campaign around how your business makes money. Before we spend a rupee, we agree the results that matter to you, whether that is phone calls, form enquiries, store visits or online sales.",
+    "We plan every campaign around how your business makes money. Before we spend a dollar, we agree the results that matter to you, whether that is phone calls, form enquiries, store visits or online sales.",
     "Then we report on exactly those numbers every month, in plain language, with clear next steps. No vanity metrics, no jargon, no surprises on the invoice.",
   ],
   points: [
@@ -135,7 +135,7 @@ export const approach = {
   cards: [
     {
       eyebrow: "Our mission",
-      title: "Make every rupee of marketing traceable to a result",
+      title: "Make every dollar of marketing traceable to a result",
       body: "Proper tracking from day one, so you always know which campaigns bring in enquiries and sales, and which do not.",
     },
     {
@@ -244,7 +244,7 @@ export const about = {
   eyebrow: "About us",
   title: "A digital marketing agency built around *your results*",
   description:
-    "Tech Digital Marketer helps Indian businesses grow online through SEO, Google Ads, performance marketing and Meta ads. We keep it simple: clear goals, honest reporting and campaigns measured on enquiries and sales.",
+    "Tech Digital Marketer helps businesses grow online through SEO, Google Ads, performance marketing and Meta ads. We keep it simple: clear goals, honest reporting and campaigns measured on enquiries and sales.",
   story: {
     title: "Why we *exist*",
     paragraphs: [
@@ -309,10 +309,10 @@ export const contact = {
   description:
     "Tell us about your business and goals. We reply within one working day with next steps and, if we are a good fit, a free audit.",
   budgets: [
-    "Under ₹50,000 / month",
-    "₹50,000 to ₹1.5 lakh / month",
-    "₹1.5 lakh to ₹5 lakh / month",
-    "₹5 lakh+ / month",
+    "Under $1,000 / month",
+    "$1,000 to $3,000 / month",
+    "$3,000 to $10,000 / month",
+    "$10,000+ / month",
   ],
   interests: ["SEO", "PPC / Google Ads", "Performance marketing", "Meta ads", "Not sure yet"],
 };

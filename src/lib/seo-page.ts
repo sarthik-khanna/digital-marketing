@@ -12,7 +12,7 @@
  * go under the buttons once the numbers are real and clients have agreed.
  */
 export const seoHero = {
-  badge: "SEO for Indian businesses",
+  badge: "SEO for growing businesses",
   checks: ["Better Google rankings", "More leads and calls", "Local SEO (Maps)"],
   stats: [
     { value: "Free", label: "SEO audit, no obligation" },
@@ -63,7 +63,7 @@ export const seoPillars: { title: string; summary: string; items: string[] }[] =
     items: [
       "Technical audit: crawling, indexing and site structure",
       "Core Web Vitals and page speed fixes",
-      "Keyword and intent research, in English and regional terms",
+      "Keyword and intent research, in the terms your customers use",
       "Schema markup and canonical tags",
       "Product and category pages for online stores",
     ],
@@ -73,7 +73,7 @@ export const seoPillars: { title: string; summary: string; items: string[] }[] =
     summary: "Your site and your business look like the safe choice.",
     items: [
       "Service pages and guides that answer buyer questions",
-      "Earned links from Indian and industry publications",
+      "Earned links from respected industry and local publications",
       "Google Business Profile and genuine customer reviews",
       "Author and business details that show expertise",
       "Refreshes for pages that have slipped",

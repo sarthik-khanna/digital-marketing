@@ -5,7 +5,7 @@ import type { BlogPostSummary } from "@/lib/blog";
 import { blogCategory } from "@/lib/blog-categories";
 import { cn } from "@/lib/utils";
 
-export const postDate = new Intl.DateTimeFormat("en-IN", {
+export const postDate = new Intl.DateTimeFormat("en-GB", {
   day: "numeric",
   month: "short",
   year: "numeric",

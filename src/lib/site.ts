@@ -6,9 +6,9 @@ export const site = {
   name: "Tech Digital Marketer",
   /** Short form for tight spaces (footer wordmark). */
   shortName: "TDM",
-  tagline: "SEO, Google Ads & Meta Ads Agency in India",
+  tagline: "SEO, Google Ads & Meta Ads Agency",
   description:
-    "Tech Digital Marketer is a digital marketing agency for growing Indian businesses: SEO, Google Ads, performance marketing and Meta ads, measured on enquiries and sales.",
+    "Tech Digital Marketer is a digital marketing agency for growing businesses: SEO, Google Ads, performance marketing and Meta ads, measured on enquiries and sales.",
   /**
    * The live address, used for the sitemap, robots.txt, canonical URLs and
    * password reset links. Vercel serves the site on www and 308-redirects the
@@ -18,9 +18,13 @@ export const site = {
   url: "https://www.techdigitalmarketer.com",
   /** Wordmark shown in the navbar. The favicon lives in src/app (icon.png, apple-icon.png, favicon.ico). */
   logo: { src: "/brand/tdm-logo.png", width: 238, height: 160 },
-  // TODO: real phone and address. Empty values are hidden on the site.
+  // TODO: real address. Empty values are hidden on the site.
   email: "seo@techdigitalmarketer.com" as string,
-  phone: "" as string,
+  /** Shown in the footer and on the contact page, in international format so they dial from any country. */
+  phones: [
+    { display: "+61 435 032 650", tel: "+61435032650" },
+    { display: "+91 84373 20135", tel: "+918437320135" },
+  ] as { display: string; tel: string }[],
   address: "" as string,
   /** The logo links home, so the menu leads with the four services. */
   nav: [

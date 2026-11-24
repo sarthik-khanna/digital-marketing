@@ -23,14 +23,14 @@ export type SeedPost = {
 
 export const seedPosts: SeedPost[] = [
   {
-    slug: "local-seo-checklist-india",
+    slug: "local-seo-checklist",
     title: "Local SEO checklist: how to show up in 'near me' searches",
     excerpt:
       "The map pack decides who gets the call when someone nearby searches for what you sell. Here is what to fix first, in order.",
     category: "seo",
     publishedAt: "2026-10-28",
     cover: "1524661135-423995f22d0b",
-    content: `When someone searches for "dentist near me" or "interior designer in Andheri", Google usually shows a map with three businesses before any normal results. That box is called the map pack, and for clinics, showrooms, institutes and service businesses it is where most calls come from.
+    content: `When someone searches for "dentist near me" or "interior designer in Brooklyn", Google usually shows a map with three businesses before any normal results. That box is called the map pack, and for clinics, showrooms, institutes and service businesses it is where most calls come from.
 
 The good news: local rankings depend heavily on things you control. Work through this list in order.
 
@@ -43,15 +43,15 @@ Then fill in every field:
 - **Primary category.** Pick the one that best describes what you sell, not the broadest one. "Orthodontist" beats "Dentist" if braces are your main service.
 - **Secondary categories** for the other services you offer.
 - **Service areas** if you visit customers, or an accurate address if they visit you.
-- **Hours**, including special hours for festivals and holidays.
+- **Hours**, including special hours for public holidays.
 - **Services and products** with short descriptions and prices where you can.
 - **Photos** of the outside, the inside, your team and your work. Real photos, not stock.
 
 ## 2. Keep your name, address and phone number identical everywhere
 
-Google cross-checks your business details across the web. If your website says "Shop 4, MG Road" and a directory says "Shop No. 4, Mahatma Gandhi Road", that small mismatch weakens trust in your listing.
+Google cross-checks your business details across the web. If your website says "Suite 4, 12 King St" and a directory says "Unit 4, 12 King Street", that small mismatch weakens trust in your listing.
 
-Write down one exact version of your name, address and phone number, and use it on your website, Google Business Profile, Justdial, Sulekha, IndiaMART, Facebook and any industry directories you are listed in.
+Write down one exact version of your name, address and phone number, and use it on your website, Google Business Profile, Apple Maps, Bing Places, Yelp, Facebook and any industry directories you are listed in.
 
 ## 3. Build a steady flow of genuine reviews
 
@@ -209,7 +209,7 @@ The number to watch is not the cheapest lead. It is the cheapest lead your team 
 
 **ROAS = revenue from ads ÷ ad spend.**
 
-If you spent ₹1,00,000 on ads and they brought in ₹4,00,000 in sales, your ROAS is 4. Every rupee returned four.
+If you spent $10,000 on ads and they brought in $40,000 in sales, your ROAS is 4. Every dollar returned four.
 
 ROAS is most useful for e-commerce, where each sale has a clear value. Two cautions:
 
@@ -222,7 +222,7 @@ ROAS is most useful for e-commerce, where each sale has a clear value. Two cauti
 
 **CAC = total marketing spend ÷ new customers.**
 
-For lead-generation businesses this is often more useful than ROAS. If you spent ₹2,00,000 across Google, Meta and agency fees and won 40 new customers, your CAC is ₹5,000.
+For lead-generation businesses this is often more useful than ROAS. If you spent $20,000 across Google, Meta and agency fees and won 40 new customers, your CAC is $500.
 
 Two things make CAC honest:
 
@@ -233,7 +233,7 @@ Two things make CAC honest:
 
 **Payback = how long a new customer takes to cover what you spent to win them.**
 
-If a customer costs ₹5,000 to acquire and brings in ₹2,500 of gross profit a month, payback is two months. After that, they are profit.
+If a customer costs $500 to acquire and brings in $250 of gross profit a month, payback is two months. After that, they are profit.
 
 Payback is what tells you whether you can afford to spend more. A short payback means growth funds itself quickly. A long payback means you need cash in the bank to keep acquiring customers before they pay back.
 
@@ -411,7 +411,7 @@ A practical rhythm:
 2. **Test several concepts at once** so you always have a likely replacement ready.
 3. **Mix formats:** static images, carousels, short vertical videos for Reels and Stories.
 4. **Use what your customers actually say.** Reviews, sales call notes and WhatsApp questions are full of hooks.
-5. **Make regional language versions** if your customers prefer Hindi or a local language. They often feel fresh to audiences who have tuned out English ads.
+5. **Make versions in other languages** if many of your customers prefer one. They often feel fresh to audiences who have tuned out English ads.
 
 ## How many new ads do you need?
 

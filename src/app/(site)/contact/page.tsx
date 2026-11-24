@@ -15,9 +15,9 @@ export const metadata: Metadata = {
 };
 
 // Contact details left empty in site.ts are skipped.
-const details = [
+const details: { icon: typeof IconPhone; label: string; href?: string }[] = [
   { icon: IconMail, label: site.email, href: `mailto:${site.email}` },
-  { icon: IconPhone, label: site.phone, href: `tel:${site.phone.replace(/[^+\d]/g, "")}` },
+  ...site.phones.map((phone) => ({ icon: IconPhone, label: phone.display, href: `tel:${phone.tel}` })),
   { icon: IconMapPin, label: site.address },
   { icon: IconClock, label: "Replies within one working day" },
 ].filter((detail) => detail.label);

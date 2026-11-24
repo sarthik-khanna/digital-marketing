@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "About us",
   description:
-    "Tech Digital Marketer is a digital marketing agency helping Indian businesses grow with SEO, Google Ads, performance marketing and Meta ads, measured on enquiries and sales.",
+    "Tech Digital Marketer is a digital marketing agency helping businesses grow with SEO, Google Ads, performance marketing and Meta ads, measured on enquiries and sales.",
   alternates: { canonical: "/about" },
 };
 
