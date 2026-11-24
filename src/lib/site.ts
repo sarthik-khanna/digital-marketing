@@ -20,11 +20,15 @@ export const site = {
   logo: { src: "/brand/tdm-logo.png", width: 238, height: 160 },
   // TODO: real address. Empty values are hidden on the site.
   email: "seo@techdigitalmarketer.com" as string,
-  /** Shown in the footer and on the contact page, in international format so they dial from any country. */
+  /**
+   * Shown with their country in the footer and on the contact page, in
+   * international format so they dial from any country.
+   */
   phones: [
-    { display: "+61 435 032 650", tel: "+61435032650" },
-    { display: "+91 84373 20135", tel: "+918437320135" },
-  ] as { display: string; tel: string }[],
+    { country: "Australia", display: "+61 435 032 650", tel: "+61435032650" },
+    { country: "India", display: "+91 84373 20135", tel: "+918437320135" },
+    { country: "New Zealand", display: "+64 22 462 8921", tel: "+64224628921" },
+  ] as { country: string; display: string; tel: string }[],
   address: "" as string,
   /** The logo links home, so the menu leads with the four services. */
   nav: [

@@ -14,7 +14,7 @@ export const invoiceSettings = {
   gstin,
   pan: "" as string,
   email: site.email as string,
-  phone: site.phones.map((phone) => phone.display).join(" · "),
+  phone: site.phones.map((phone) => `${phone.country} ${phone.display}`).join(" · "),
   /** SAC code for the services, e.g. advertising services. Shown only when set. */
   sac: "" as string,
   bank: {

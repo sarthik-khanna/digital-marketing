@@ -15,9 +15,9 @@ export const metadata: Metadata = {
 };
 
 // Contact details left empty in site.ts are skipped.
-const details: { icon: typeof IconPhone; label: string; href?: string }[] = [
+const details: { icon: typeof IconPhone; label: string; href?: string; country?: string }[] = [
   { icon: IconMail, label: site.email, href: `mailto:${site.email}` },
-  ...site.phones.map((phone) => ({ icon: IconPhone, label: phone.display, href: `tel:${phone.tel}` })),
+  ...site.phones.map((phone) => ({ icon: IconPhone, label: phone.display, href: `tel:${phone.tel}`, country: phone.country })),
   { icon: IconMapPin, label: site.address },
   { icon: IconClock, label: "Replies within one working day" },
 ].filter((detail) => detail.label);
@@ -58,13 +58,14 @@ export default function ContactPage() {
             <p className="mt-6 max-w-md text-lg text-pretty text-muted-foreground">{contact.description}</p>
 
             <ul className="mt-10 grid max-w-md gap-3">
-              {details.map(({ icon: Icon, label, href }) => (
+              {details.map(({ icon: Icon, label, href, country }) => (
                 <li key={label} className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3 pr-4">
                   <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-secondary text-primary">
                     <Icon className="size-5" aria-hidden="true" />
                   </span>
                   {href ? (
                     <a href={href} className="min-w-0 text-sm font-medium break-all transition-colors hover:text-primary">
+                      {country && <span className="block text-xs font-normal text-muted-foreground">{country}</span>}
                       {label}
                     </a>
                   ) : (

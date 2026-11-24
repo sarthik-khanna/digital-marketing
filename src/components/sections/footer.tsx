@@ -13,8 +13,8 @@ const credits = [
 ];
 
 // Contact lines left empty in site.ts are skipped.
-const contactLines: { icon: typeof IconPhone; label: string; href?: string }[] = [
-  ...site.phones.map((phone) => ({ icon: IconPhone, label: phone.display, href: `tel:${phone.tel}` })),
+const contactLines: { icon: typeof IconPhone; label: string; href?: string; country?: string }[] = [
+  ...site.phones.map((phone) => ({ icon: IconPhone, label: phone.display, href: `tel:${phone.tel}`, country: phone.country })),
   { icon: IconMail, label: site.email, href: `mailto:${site.email}` },
   { icon: IconMapPin, label: site.address },
 ].filter((line) => line.label);
@@ -90,11 +90,12 @@ export function Footer() {
         <div>
           <p className="font-heading text-base">Get in touch</p>
           <ul className="mt-5 space-y-3 text-sm">
-            {contactLines.map(({ icon: Icon, label, href }) => (
+            {contactLines.map(({ icon: Icon, label, href, country }) => (
               <li key={label} className="flex items-start gap-3">
                 <Icon className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
                 {href ? (
                   <a href={href} className={`break-all ${linkClass}`}>
+                    {country && <span className="block text-xs text-muted-foreground">{country}</span>}
                     {label}
                   </a>
                 ) : (
