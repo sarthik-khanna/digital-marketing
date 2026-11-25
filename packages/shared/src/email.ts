@@ -1,7 +1,16 @@
 import "server-only";
 
+/**
+ * An env value without surrounding spaces or quotes. Pasting `"Name <a@b.com>"`
+ * from .env.example into a hosting dashboard keeps the quotes, and Resend then
+ * rejects the from address.
+ */
+function setting(name: "RESEND_API_KEY" | "RESEND_FROM_EMAIL") {
+  return (process.env[name] ?? "").trim().replace(/^(["'])(.*)\1$/, "$2").trim();
+}
+
 export function emailConfigured() {
-  return Boolean(process.env.RESEND_API_KEY && process.env.RESEND_FROM_EMAIL);
+  return Boolean(setting("RESEND_API_KEY") && setting("RESEND_FROM_EMAIL"));
 }
 
 export type EmailAttachment = {
@@ -27,11 +36,11 @@ export async function sendEmail({
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      Authorization: `Bearer ${setting("RESEND_API_KEY")}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: process.env.RESEND_FROM_EMAIL,
+      from: setting("RESEND_FROM_EMAIL"),
       ...message,
       to: [message.to],
       ...(replyTo ? { reply_to: replyTo } : {}),
