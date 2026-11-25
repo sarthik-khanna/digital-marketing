@@ -5,8 +5,9 @@ Aceternity UI (base), Vengeance UI and Skiper UI (free tier).
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
-npm run build    # production build
+npm run dev:landing   # website, http://localhost:3000
+npm run dev:e-sign    # e-sign app on :3001 (run in a second terminal)
+npm run build         # production build
 ```
 
 ## E-Sign app (`/e-sign`)
@@ -18,8 +19,8 @@ The signed PDF is stored, emailed to them, and listed for admins at `/admin/e-si
 
 ```bash
 npm run db:setup     # once: adds the esign_* tables (existing data untouched)
-npm run dev          # website, http://localhost:3000
-npm run dev:esign    # e-sign app on :3001, open it at http://localhost:3000/e-sign
+npm run dev:landing  # website, http://localhost:3000
+npm run dev:e-sign   # e-sign app on :3001, open it at http://localhost:3000/e-sign
 npm run build:esign  # production build of the e-sign app
 npm test             # unit tests for packages/esign-core
 ```

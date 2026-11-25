@@ -8,7 +8,8 @@
   ],
   "scripts": {
     "dev": "next dev",
-    "dev:esign": "npm run dev --workspace=@tdm/e-sign",
+    "dev:landing": "next dev",
+    "dev:e-sign": "npm run dev --workspace=@tdm/e-sign",
     "build": "next build",
     "build:esign": "npm run build --workspace=@tdm/e-sign",
     "start": "next start",
