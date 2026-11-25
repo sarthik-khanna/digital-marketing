@@ -1,4 +1,4 @@
-import { BookCallButton } from "@/components/services/book-call-button";
+import { BookCallButton } from "@/components/book-call-button";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { faq as defaultFaq, type Faq as FaqItem } from "@/lib/content";
 import { site } from "@/lib/site";

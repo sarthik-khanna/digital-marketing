@@ -49,6 +49,8 @@ const schema = [
     created_at timestamptz not null default now()
   )`,
   `create index if not exists audit_requests_created_at_idx on audit_requests (created_at desc)`,
+  // Dropdown answers from the service-page audit forms ("Label: answer" lines).
+  `alter table audit_requests add column if not exists details text`,
   `create table if not exists admins (
     id bigint generated always as identity primary key,
     email text not null unique,

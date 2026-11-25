@@ -12,6 +12,7 @@ import { getService, type ServiceId } from "@/lib/services";
 import { received } from "./list-parts";
 
 const formLabel: Record<AuditRequest["form"], string> = {
+  "service-audit": "Free audit form",
   hero: "Lead form",
   "seo-audit": "SEO audit form",
 };
@@ -31,6 +32,12 @@ function Website({ url }: { url: string | null }) {
       {url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
     </a>
   );
+}
+
+/** Dropdown answers from the audit form, one "Label: answer" per line. */
+function Details({ details }: { details: string | null }) {
+  if (!details) return <span className="text-muted-foreground">—</span>;
+  return <span className="whitespace-pre-line">{details}</span>;
 }
 
 function Phone({ phone }: { phone: string | null }) {
@@ -76,6 +83,10 @@ export function AuditsTable({ requests }: { requests: AuditRequest[] }) {
               <dd className="min-w-0">
                 <Website url={request.website} />
               </dd>
+              <dt className="text-muted-foreground">Answers</dt>
+              <dd>
+                <Details details={request.details} />
+              </dd>
               <dt className="text-muted-foreground">From</dt>
               <dd>
                 {formLabel[request.form]} on {serviceName(request.service)}
@@ -94,6 +105,7 @@ export function AuditsTable({ requests }: { requests: AuditRequest[] }) {
               <TableHead className="px-4">Email</TableHead>
               <TableHead className="px-4">Phone</TableHead>
               <TableHead className="px-4">Website</TableHead>
+              <TableHead className="px-4">Answers</TableHead>
               <TableHead className="px-4">Service</TableHead>
               <TableHead className="px-4">Form</TableHead>
             </TableRow>
@@ -114,9 +126,12 @@ export function AuditsTable({ requests }: { requests: AuditRequest[] }) {
                 <TableCell className="max-w-56 px-4 py-3 whitespace-normal">
                   <Website url={request.website} />
                 </TableCell>
+                <TableCell className="max-w-64 px-4 py-3 text-xs whitespace-normal">
+                  <Details details={request.details} />
+                </TableCell>
                 <TableCell className="px-4 py-3">{serviceName(request.service)}</TableCell>
                 <TableCell className="px-4 py-3">
-                  <Badge variant={request.form === "seo-audit" ? "secondary" : "outline"}>{formLabel[request.form]}</Badge>
+                  <Badge variant={request.form === "service-audit" ? "default" : "outline"}>{formLabel[request.form]}</Badge>
                 </TableCell>
               </TableRow>
             ))}

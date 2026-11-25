@@ -24,9 +24,11 @@ export type AuditRequest = {
   website: string | null;
   /** ServiceId of the page it came from. */
   service: string;
-  /** "hero" (service-page lead form) or "seo-audit" (website + email form). */
-  form: "hero" | "seo-audit";
+  /** "service-audit" (current service-page form); "hero" and "seo-audit" are earlier forms. */
+  form: "service-audit" | "hero" | "seo-audit";
   page: string | null;
+  /** Dropdown answers, one "Label: answer" per line; null on older rows. */
+  details: string | null;
   created_at: Date;
 };
 

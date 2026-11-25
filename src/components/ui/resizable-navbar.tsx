@@ -89,6 +89,8 @@ export const Navbar = ({ children }: NavbarProps) => {
       <div
         className={cn(
           "absolute inset-x-0 top-3 z-40 w-full",
+          // Service pages open with a 2.25rem announcement bar (#service-announcement); sit below it.
+          "[body:has(#service-announcement)_&]:top-12",
           floating && "invisible",
         )}
       >

@@ -1,8 +1,8 @@
 import { IconCircleCheckFilled } from "@tabler/icons-react";
 import { ArrowLink } from "@/components/arrow-link";
-import { Sparkle } from "@/components/sparkle";
 import { hero } from "@/lib/content";
 import { CanvasText } from "@/components/ui/canvas-text";
+import { HeroBackdrop } from "./hero-backdrop";
 import { HeroVisual } from "./hero-visual";
 
 // The *starred* phrase in the headline gets the Aceternity canvas-text effect:
@@ -15,16 +15,7 @@ const lineColors = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1].map(
 export function Hero() {
   return (
     <section className="relative isolate overflow-hidden px-4 pt-32 pb-20 md:pt-40">
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-grid" />
-      <div
-        aria-hidden="true"
-        className="absolute -top-32 -left-40 -z-10 size-[36rem] rounded-full bg-tint-rose/60 blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute top-20 right-[-10%] -z-10 size-[40rem] rounded-full bg-primary/15 blur-3xl"
-      />
-      <Sparkle className="top-36 left-[46%] hidden lg:block" />
+      <HeroBackdrop />
 
       <div className="mx-auto grid max-w-7xl items-center gap-16 lg:grid-cols-[1.05fr_1fr]">
         <div>

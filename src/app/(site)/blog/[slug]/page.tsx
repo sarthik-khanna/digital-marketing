@@ -9,7 +9,7 @@ import { extractHeadings, Markdown } from "@/components/blog/markdown";
 import { CategoryTag, PostCard, postDate } from "@/components/blog/post-card";
 import { CtaBand } from "@/components/sections/cta-band";
 import { sectionTitle } from "@/components/sections/section-heading";
-import { JsonLd } from "@/components/services/json-ld";
+import { JsonLd } from "@/components/json-ld";
 import { getPublishedPost, getPublishedPosts } from "@/lib/blog";
 import { blogCategory } from "@/lib/blog-categories";
 import { getService } from "@/lib/services";

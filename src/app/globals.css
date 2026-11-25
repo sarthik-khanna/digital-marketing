@@ -34,6 +34,8 @@
   --color-ink-foreground: var(--ink-foreground);
   --color-highlight: var(--highlight);
   --color-highlight-foreground: var(--highlight-foreground);
+  --color-highlight-strong: var(--highlight-strong);
+  --color-success: var(--success);
   --color-tint-rose: var(--tint-rose);
   --color-tint-sky: var(--tint-sky);
   --color-tint-amber: var(--tint-amber);
@@ -132,6 +134,10 @@
   /* Orange from the logo arrow. Fill with navy text, or text on ink; never small text on white (3:1). */
   --highlight: oklch(0.688 0.196 45.1);
   --highlight-foreground: oklch(0.16 0.064 264);
+  /* Darker orange that passes 4.5:1 as small text on white and the canvas (service-page eyebrows). */
+  --highlight-strong: oklch(0.53 0.165 45);
+  /* Positive marks: the "serving" dot and the comparison ticks. */
+  --success: oklch(0.6 0.15 155);
   /* Pastel card tints (service cards, mission/vision cards, page glows). */
   --tint-rose: oklch(0.92 0.05 20);
   --tint-sky: oklch(0.88 0.07 255);

@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import { ServiceTemplate, serviceMetadata } from "@/components/services/service-template";
-import { getService } from "@/lib/services";
+import { ServicePageView, serviceMetadata } from "@/components/service-page/service-page";
 
-const service = getService("meta");
-
-export const metadata: Metadata = serviceMetadata(service);
+export const metadata: Metadata = serviceMetadata("meta");
 
 export default function MetaAdsPage() {
-  return <ServiceTemplate service={service} />;
+  return <ServicePageView id="meta" />;
 }
